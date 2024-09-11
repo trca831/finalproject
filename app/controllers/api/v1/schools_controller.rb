@@ -1,4 +1,4 @@
-class SchoolsController < ApplicationController
+class Api::V1::SchoolsController < ApplicationController
   before_action :set_school, only: %i[ show update destroy ]
 
   # GET /schools
