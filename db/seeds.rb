@@ -11,6 +11,9 @@
 require 'faker'
 
 # Clear tables
+KitRequest.destroy_all
+KitItem.destroy_all
+Kit.destroy_all
 Teacher.destroy_all
 School.destroy_all
 
@@ -23,14 +26,36 @@ School.destroy_all
 end
 
 # Create sample teachers
-# Assuming you have at least 10 schools to associate with teachers
 school_ids = School.pluck(:id)
 
-20.times do
+10.times do
   Teacher.create!(
     name: Faker::Name.name,
     email: Faker::Internet.email,
-    school: Faker::Educator.school_name,
     school_id: school_ids.sample  # Randomly assign a school to each teacher
   )
 end
+
+# Seeding Kits
+Kit.create([
+  { name: 'PK-2 Kit', description: 'Learning materials appropriate for grades Pre-K through 2nd grade.' },
+  { name: '3-5 Kit', description: 'Learning materials appropriate for grades 3rd through 5th grade.' },
+  { name: '6-8 Kit', description: 'Learning materials for middle school grades 6th through 8th.' }
+])
+
+# Seeding KitItems
+KitItem.create([
+  { name: 'Counting Blocks', description: 'Blocks to help with counting and basic math skills.', kit_id: Kit.find_by(name: 'PK-2 Kit').id },
+  { name: 'Phonics Cards', description: 'Cards for learning phonics.', kit_id: Kit.find_by(name: 'PK-2 Kit').id },
+  { name: 'Science Experiment Set', description: 'Basic science experiment materials for 3rd-5th grade.', kit_id: Kit.find_by(name: '3-5 Kit').id },
+  { name: 'Math Puzzles', description: 'Puzzles to challenge math skills in 6th-8th grade.', kit_id: Kit.find_by(name: '6-8 Kit').id }
+])
+
+# Seeding KitRequests
+teacher = Teacher.first
+teacher2 = Teacher.last
+
+KitRequest.create([
+  { grade_level: 'Pre-K', school_year: '2024-2025', teacher: teacher, kit: Kit.find_by(name: 'PK-2 Kit') },
+  { grade_level: '3rd Grade', school_year: '2024-2025', teacher: teacher2, kit: Kit.find_by(name: '3-5 Kit') }
+])
