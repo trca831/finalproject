@@ -46,6 +46,6 @@ class Api::V1::TeachersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def teacher_params
-      params.require(:teacher).permit(:name, :email, :school, :school_id)
+      params.require(:teacher).permit(:name, :email, :school_id)
     end
 end
