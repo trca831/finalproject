@@ -3,9 +3,9 @@ class Api::V1::KitItemsController < ApplicationController
 
   # GET /kit_items
   def index
-    @kit_items = KitItem.all
-
-    render json: @kit_items
+    kit = Kit.find(params[:kit_id])
+    kit_items = kit.kit_items
+    render json: kit_items
   end
 
   # GET /kit_items/1

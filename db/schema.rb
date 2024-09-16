@@ -10,14 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_15_231850) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_16_050024) do
   create_table "kit_items", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "kit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["kit_id"], name: "index_kit_items_on_kit_id"
+  end
+
+  create_table "kit_items_kits", id: false, force: :cascade do |t|
+    t.integer "kit_id", null: false
+    t.integer "kit_item_id", null: false
   end
 
   create_table "kit_requests", force: :cascade do |t|
@@ -36,6 +39,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_231850) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "grade_level"
   end
 
   create_table "schools", force: :cascade do |t|
@@ -54,7 +58,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_231850) do
     t.index ["school_id"], name: "index_teachers_on_school_id"
   end
 
-  add_foreign_key "kit_items", "kits"
   add_foreign_key "kit_requests", "kits"
   add_foreign_key "kit_requests", "teachers"
   add_foreign_key "teachers", "schools"
