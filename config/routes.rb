@@ -4,6 +4,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :schools
       resources :teachers
+      resources :kit_requests
+      resources :kits do
+        resources :kit_items, only: [ :index, :show ]
+      end
     end
   end
 

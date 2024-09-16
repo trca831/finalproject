@@ -16,40 +16,32 @@ erDiagram
         datetime created_at
     }
     
-    PACKAGES {
+    KITS {
         int id PK
         varchar name
         text description
         datetime created_at
     }
     
-    PACKAGE_ITEMS {
+    KIT_ITEMS {
         int id PK
         varchar name
         text description
-        int package_id FK
+        int kit_id FK
         datetime created_at
     }
     
-    PACKAGE_REQUESTS {
+    KIT_REQUESTS {
         int id PK
         int teacher_id FK
-        int package_id FK
+        int kit_id FK
         varchar grade_level
         varchar school_year
         datetime created_at
     }
 
-    PACKAGE_REQUEST_ITEMS {
-        int id PK
-        int package_request_id FK
-        int package_item_id FK
-        datetime created_at
-    }
-
+    
     SCHOOLS ||--o{ TEACHERS : "employs"
-    TEACHERS ||--o{ PACKAGE_REQUESTS : "places"
-    PACKAGES ||--o{ PACKAGE_REQUESTS : "requested by"
-    PACKAGES ||--o{ PACKAGE_ITEMS : "contains"
-    PACKAGE_REQUESTS ||--o{ PACKAGE_REQUEST_ITEMS : "contains"
-    PACKAGE_ITEMS ||--o{ PACKAGE_REQUEST_ITEMS : "included in"
+    TEACHERS ||--o{ KIT_REQUESTS : "places"
+    KITS ||--o{ KIT_REQUESTS : "requested by"
+    KITS ||--o{ KIT_ITEMS : "contains"
