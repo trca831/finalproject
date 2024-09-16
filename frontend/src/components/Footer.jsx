@@ -8,7 +8,8 @@ function Footer() {
                 <div className="row align-items-center">
                     <div className="col-lg-4 text-lg-start"><p>Copyright &copy; Project AWARE 2024</p>
                     <p>1234 Helping Hand Blvd.<br/>
-                    Caring, IL 67890</p></div>
+                    Caring, IL 67890</p>
+                    </div>
                     <div className="col-lg-4 my-3 my-lg-0">
                         <a className="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
                         <a className="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
