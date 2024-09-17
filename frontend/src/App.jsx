@@ -5,6 +5,7 @@ import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Contact from './components/pages/Contact';
 import Kits from './components/pages/Kits';
+import RequestKit from './components/pages/RequestKit'
 import ScrollToHash from './components/ScrollToHash';
 
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/kits" element={<Kits />} />
+            <Route path="/kit_requests" element={<RequestKit />} />
           </Routes>
         </PageWrapper>
       </Router>
