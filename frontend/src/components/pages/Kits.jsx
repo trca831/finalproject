@@ -43,7 +43,7 @@ function Kits() {
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
 
-            <div className="row d-flex p-1">
+            <div className="row d-flex p-2">
               {kits.map(
                 (
                   kit // Map through the list of kits
@@ -111,9 +111,9 @@ function Kits() {
                                       <div
                                         id={`carouselKitItems${kit.id}`}
                                         className="carousel slide"
-                                        data-ride="carousel"
+                                        data-bs-ride="carousel"
                                       >
-                                        <div className="carousel-inner">
+                                        <div className="carousel-inner bg-primary p-5 mb-5">
                                           {kit.kit_items.map((item, index) => (
                                             <div
                                               key={item.id}
@@ -121,14 +121,16 @@ function Kits() {
                                                 index === 0 ? "active" : ""
                                               }`}
                                             >
+                                              <div className="carousel-img-container d-flex justify-content-center align-items-center">
                                               <img
                                                 src={
                                                   item.image_url ||
                                                   "/assets/img/portfolio/default.jpg"
                                                 }
-                                                className="d-block w-100"
+                                                className="d-block w-50"
                                                 alt={item.name}
                                               />
+                                              </div>
                                               <div className="carousel-caption-bottom">
                                                 <div className="caption-content">
                                                   <h5 className="text-dark">
@@ -146,7 +148,7 @@ function Kits() {
                                           className="carousel-control-prev"
                                           href={`#carouselKitItems${kit.id}`}
                                           role="button"
-                                          data-slide="prev"
+                                          data-bs-slide="prev"
                                         >
                                           <span
                                             className="carousel-control-prev-icon"
@@ -160,7 +162,7 @@ function Kits() {
                                           className="carousel-control-next"
                                           href={`#carouselKitItems${kit.id}`}
                                           role="button"
-                                          data-slide="next"
+                                          data-bs-slide="next"
                                         >
                                           <span
                                             className="carousel-control-next-icon"
@@ -171,11 +173,11 @@ function Kits() {
                                       </div>
 
                                       <button
-                                        class="btn btn-primary btn-xl text-uppercase"
+                                        className="btn btn-primary btn-xl text-uppercase mt-5"
                                         data-bs-dismiss="modal"
                                         type="button"
                                       >
-                                        <i class="fas fa-xmark me-1"></i>
+                                        <i className="fas fa-xmark me-1"></i>
                                         Close Kit
                                       </button>
                                     </div>
