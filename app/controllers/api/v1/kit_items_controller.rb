@@ -46,6 +46,6 @@ class Api::V1::KitItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def kit_item_params
-      params.require(:kit_item).permit(:name, :description)
+      params.require(:kit_item).permit(:name, :description, :image_url)
     end
 end

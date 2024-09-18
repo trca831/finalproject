@@ -18,7 +18,7 @@ Teacher.destroy_all
 School.destroy_all
 
 # Create sample schools
-10.times do
+5.times do
   School.create!(
     name: Faker::Educator.school_name,
     address: Faker::Address.full_address
@@ -49,22 +49,55 @@ kit_items = KitItem.create([
   { name: 'Counting Blocks', description: 'Blocks to help with counting and basic math skills.' },
   { name: 'Phonics Cards', description: 'Cards for learning phonics.' },
   { name: 'Science Experiment Set', description: 'Basic science experiment materials for 3rd-5th grade.' },
-  { name: 'Math Puzzles', description: 'Puzzles to challenge math skills in 6th-8th grade.' }
+  { name: 'Math Puzzles', description: 'Puzzles to challenge math skills in 6th-8th grade.' },
+  { name: 'Sensory Fidgets', description: 'Occupy their head as well as their hands with these effective sensory fidgets for 9th-12th grade.' }
 ])
 
 # Associate KitItems with Kits using the join table
 discovery_kit = Kit.find_by(name: 'Discovery Kit')
 empowerment_kit = Kit.find_by(name: 'Empowerment Kit')
 perspectives_kit = Kit.find_by(name: 'Perspectives Kit')
+impact_kit = Kit.find_by(name: 'Impact Kit')
+
+# Attach images to Kits (using local files or remote URLs)
+discovery_kit.image.attach(
+  io: File.open('db/seed_img/blue-box.jpg'),
+  filename: 'blue-box.jpg',
+  content_type: 'image/jpeg',
+  identify: false
+)
+
+empowerment_kit.image.attach(
+  io: File.open('db/seed_img/green-box.jpg'),
+  filename: 'green-box.jpg',
+  content_type: 'image/jpeg',
+  identify: false
+)
+
+perspectives_kit.image.attach(
+  io: File.open('db/seed_img/purple-box.jpg'),
+  filename: 'purple-box.jpg',
+  content_type: 'image/jpeg',
+  identify: false
+)
+
+impact_kit.image.attach(
+  io: File.open('db/seed_img/gray-box.jpg'),
+  filename: 'gray-box.jpg',
+  content_type: 'image/jpeg',
+  identify: false
+)
 
 counting_blocks = KitItem.find_by(name: 'Counting Blocks')
 science_experiment_set = KitItem.find_by(name: 'Science Experiment Set')
 math_puzzles = KitItem.find_by(name: 'Math Puzzles')
+sensory_fidgets = KitItem.find_by(name: 'Sensory Fidgets')
 
 # Now associate KitItems with Kits
 discovery_kit.kit_items << counting_blocks
 empowerment_kit.kit_items << science_experiment_set
 perspectives_kit.kit_items << math_puzzles
+impact_kit.kit_items << sensory_fidgets
 
 # Seeding KitRequests
 teacher = Teacher.first

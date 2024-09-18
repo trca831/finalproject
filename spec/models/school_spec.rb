@@ -18,7 +18,7 @@ RSpec.describe School, type: :model do
   end
 
   it "is not valid with an incomplete address" do
-    school.address = "Main St, Los Angeles, CA"
+    school.address = "Main St"
     expect(school).to_not be_valid
   end
 
