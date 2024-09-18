@@ -16,7 +16,6 @@ function Kits() {
           const json = await response.json();
           console.log("Fetched kits data:", json);
           setKits(json);
-          
         } else {
           throw response;
         }
@@ -82,154 +81,111 @@ function Kits() {
                             </button>
                           </Link>
                         </div>
-                      
-                    
-                    <div
-                      class="portfolio-modal modal fade"
-                      id={`portfolioModal${kit.id}`}
-                      tabindex="-1"
-                      role="dialog"
-                      aria-hidden="true"
-                      key={kit.id}
-                    >
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="close-modal" data-bs-dismiss="modal">
-                            <img
-                              src="assets/img/close-icon.svg"
-                              alt="Close modal"
-                            />
-                          </div>
-                          <div class="container">
-                            <div class="row justify-content-center">
-                              <div class="col-lg-8">
-                                <div class="modal-body">
-                                  <h2 class="text-uppercase">{kit.name}</h2>
-                                  <p class="item-intro text-muted">
-                                    {kit.description}
-                                  </p>
 
-                                  <div
-                                    id="carouselKitItems"
-                                    class="carousel slide"
-                                    data-bs-ride="carousel"
-                                  >
-                                    <div class="carousel-indicators">
+                        <div
+                          class="portfolio-modal modal fade"
+                          id={`portfolioModal${kit.id}`}
+                          tabindex="-1"
+                          role="dialog"
+                          aria-hidden="true"
+                          key={kit.id}
+                        >
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="close-modal" data-bs-dismiss="modal">
+                                <img
+                                  src="assets/img/close-icon.svg"
+                                  alt="Close modal"
+                                />
+                              </div>
+                              <div class="container">
+                                <div class="row justify-content-center">
+                                  <div class="col-lg-8">
+                                    <div class="modal-body">
+                                      <h2 class="text-uppercase">{kit.name}</h2>
+                                      <p class="item-intro text-muted">
+                                        {kit.description}
+                                      </p>
+
+                                      {/* Carousel for kit_items */}
+                                      <div
+                                        id={`carouselKitItems${kit.id}`}
+                                        className="carousel slide"
+                                        data-ride="carousel"
+                                      >
+                                        <div className="carousel-inner">
+                                          {kit.kit_items.map((item, index) => (
+                                            <div
+                                              key={item.id}
+                                              className={`carousel-item ${
+                                                index === 0 ? "active" : ""
+                                              }`}
+                                            >
+                                              <img
+                                                src={
+                                                  item.image_url ||
+                                                  "/assets/img/portfolio/default.jpg"
+                                                }
+                                                className="d-block w-100"
+                                                alt={item.name}
+                                              />
+                                              <div className="carousel-caption-bottom">
+                                                <div className="caption-content">
+                                                  <h5 className="text-dark">
+                                                    {item.name}
+                                                  </h5>
+                                                  <p className="text-dark">
+                                                    {item.description}
+                                                  </p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          ))}
+                                        </div>
+                                        <a
+                                          className="carousel-control-prev"
+                                          href={`#carouselKitItems${kit.id}`}
+                                          role="button"
+                                          data-slide="prev"
+                                        >
+                                          <span
+                                            className="carousel-control-prev-icon"
+                                            aria-hidden="true"
+                                          ></span>
+                                          <span className="sr-only">
+                                            Previous
+                                          </span>
+                                        </a>
+                                        <a
+                                          className="carousel-control-next"
+                                          href={`#carouselKitItems${kit.id}`}
+                                          role="button"
+                                          data-slide="next"
+                                        >
+                                          <span
+                                            className="carousel-control-next-icon"
+                                            aria-hidden="true"
+                                          ></span>
+                                          <span className="sr-only">Next</span>
+                                        </a>
+                                      </div>
+
                                       <button
+                                        class="btn btn-primary btn-xl text-uppercase"
+                                        data-bs-dismiss="modal"
                                         type="button"
-                                        data-bs-target="#carouselKitItems"
-                                        data-bs-slide-to="0"
-                                        class="active"
-                                        aria-current="true"
-                                        aria-label="Slide 1"
-                                      ></button>
-                                      <button
-                                        type="button"
-                                        data-bs-target="#carouselKitItems"
-                                        data-bs-slide-to="1"
-                                        aria-label="Slide 2"
-                                      ></button>
-                                      <button
-                                        type="button"
-                                        data-bs-target="#carouselKitItems"
-                                        data-bs-slide-to="2"
-                                        aria-label="Slide 3"
-                                      ></button>
+                                      >
+                                        <i class="fas fa-xmark me-1"></i>
+                                        Close Kit
+                                      </button>
                                     </div>
-                                    <div class="carousel-inner">
-                                      <div class="carousel-item active">
-                                        <img
-                                          class="d-block w-100"
-                                          src="assets/img/kit-items/item1.jpg"
-                                          alt="Kit Item 1"
-                                        />
-                                        <div class="carousel-caption d-none d-md-block">
-                                          <h5>Item 1 Name</h5>
-                                          <p>Description for item 1.</p>
-                                        </div>
-                                      </div>
-                                      <div class="carousel-item">
-                                        <img
-                                          class="d-block w-100"
-                                          src="assets/img/kit-items/item2.jpg"
-                                          alt="Kit Item 2"
-                                        />
-                                        <div class="carousel-caption d-none d-md-block">
-                                          <h5>Item 2 Name</h5>
-                                          <p>Description for item 2.</p>
-                                        </div>
-                                      </div>
-                                      <div class="carousel-item">
-                                        <img
-                                          class="d-block w-100"
-                                          src="assets/img/kit-items/item3.jpg"
-                                          alt="Kit Item 3"
-                                        />
-                                        <div class="carousel-caption d-none d-md-block">
-                                          <h5>Item 3 Name</h5>
-                                          <p>Description for item 3.</p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <button
-                                      class="carousel-control-prev"
-                                      type="button"
-                                      data-bs-target="#carouselKitItems"
-                                      data-bs-slide="prev"
-                                    >
-                                      <span
-                                        class="carousel-control-prev-icon"
-                                        aria-hidden="true"
-                                      ></span>
-                                      <span class="visually-hidden">
-                                        Previous
-                                      </span>
-                                    </button>
-                                    <button
-                                      class="carousel-control-next"
-                                      type="button"
-                                      data-bs-target="#carouselKitItems"
-                                      data-bs-slide="next"
-                                    >
-                                      <span
-                                        class="carousel-control-next-icon"
-                                        aria-hidden="true"
-                                      ></span>
-                                      <span class="visually-hidden">Next</span>
-                                    </button>
                                   </div>
-
-                                  <p>
-                                    Use this area to describe the kit. Lorem
-                                    ipsum dolor sit amet, consectetur
-                                    adipisicing elit.
-                                  </p>
-                                  <ul class="list-inline">
-                                    <li>
-                                      <strong>Client:</strong>
-                                      Threads
-                                    </li>
-                                    <li>
-                                      <strong>Category:</strong>
-                                      Illustration
-                                    </li>
-                                  </ul>
-                                  <button
-                                    class="btn btn-primary btn-xl text-uppercase"
-                                    data-bs-dismiss="modal"
-                                    type="button"
-                                  >
-                                    <i class="fas fa-xmark me-1"></i>
-                                    Close Project
-                                  </button>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    </div>
                     </div>
                   </>
                 )
