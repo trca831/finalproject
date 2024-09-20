@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_17_182701) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_20_130331) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -54,12 +54,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_17_182701) do
   create_table "kit_requests", force: :cascade do |t|
     t.string "grade_level"
     t.string "school_year"
-    t.integer "teacher_id", null: false
     t.integer "kit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["kit_id"], name: "index_kit_requests_on_kit_id"
-    t.index ["teacher_id"], name: "index_kit_requests_on_teacher_id"
   end
 
   create_table "kits", force: :cascade do |t|
@@ -70,25 +68,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_17_182701) do
     t.string "grade_level"
   end
 
-  create_table "schools", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "teachers", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "school_id", null: false
-    t.index ["school_id"], name: "index_teachers_on_school_id"
-  end
-
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "kit_requests", "kits"
-  add_foreign_key "kit_requests", "teachers"
-  add_foreign_key "teachers", "schools"
 end

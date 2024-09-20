@@ -27,7 +27,6 @@ RSpec.describe KitRequest, type: :model do
     expect(kit_request).to_not be_valid
   end
 
-  it {  should belong_to (:teacher) }
 
   it { should belong_to (:kit) }
 end

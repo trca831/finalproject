@@ -14,34 +14,18 @@ require 'faker'
 KitRequest.destroy_all
 KitItem.destroy_all
 Kit.destroy_all
-Teacher.destroy_all
-School.destroy_all
 
-# Create sample schools
-5.times do
-  School.create!(
-    name: Faker::Educator.school_name,
-    address: Faker::Address.full_address
-  )
-end
 
-# Create sample teachers
-school_ids = School.pluck(:id)
 
-10.times do
-  Teacher.create!(
-    name: Faker::Name.name,
-    email: Faker::Internet.email,
-    school_id: school_ids.sample
-  )
-end
+
+
 
 # Seeding Kits
 kits = Kit.create([
-  { name: 'Discovery Kit', description: 'The Discovery Kit emphasizes exploration and learning about differences from an early age. It contains books appropriate for Pre-K through 2nd grade, as well as lesson plans and activities to complement each book. As a bonus, it includes a special book for eduators to learn more about neurodiversity in the classroom.', grade_level: 'PK-2' },
-  { name: 'Empowerment Kit', description: 'The Empowerment Kit promotes self-awareness and respect for others. It contains books appropriate for 3rd through 5th grade, as well as lesson plans and activities to complement each book. As a bonus, it includes a special book for eduators to learn more about neurodiversity in the classroom.', grade_level: '3-5' },
-  { name: 'Perspectives Kit', description: 'The Perspectives Kit aims to broaden understanding of different viewpoints and experiences. It contains books appropriate for 6th through 8th grade, as well as lesson plans and activities to complement each book. As a bonus, it includes a special book for eduators to learn more about neurodiversity in the classroom.', grade_level: '6-8' },
-  { name: 'Impact Kit', description: 'The Impact Kit aims to inspire meaningful action and change. It contains books appropriate for 9th through 12th grade, as well as lesson plans and activities to complement each book. As a bonus, it includes a special book for eduators to learn more about neurodiversity in the classroom.', grade_level: '9-12' }
+  { name: 'Discovery Kit', description: 'The Discovery Kit emphasizes exploration and learning about differences from an early age. It contains books appropriate for Pre-K through 2nd grade, as well as lesson plans and activities to complement each book. As a bonus, it includes two books for eduators to learn more about neurodiversity in the classroom.', grade_level: 'PK-2' },
+  { name: 'Empowerment Kit', description: 'The Empowerment Kit promotes self-awareness and respect for others. It contains books appropriate for 3rd through 5th grade, as well as lesson plans and activities to complement each book. As a bonus, it includes two books for eduators to learn more about neurodiversity in the classroom.', grade_level: '3-5' },
+  { name: 'Perspectives Kit', description: 'The Perspectives Kit aims to broaden understanding of different viewpoints and experiences. It contains books appropriate for 6th through 8th grade, as well as lesson plans and activities to complement each book. As a bonus, it includes two books for eduators to learn more about neurodiversity in the classroom.', grade_level: '6-8' },
+  { name: 'Impact Kit', description: 'The Impact Kit aims to inspire meaningful action and change. It contains books appropriate for 9th through 12th grade, as well as lesson plans and activities to complement each book. As a bonus, it includes two books for eduators to learn more about neurodiversity in the classroom.', grade_level: '9-12' }
 ])
 
 # Seeding KitItems
@@ -67,7 +51,7 @@ kit_items = KitItem.create([
   { name: 'The Awesome Autistic Go-To Guide: A Practical Handbook for Autistic Teens and Tweens -- Tanya Masterman, Yenn Purkis', description: 'A practical guide offering autistic teens advice on various aspects of life, from friendships and school to understanding themselves and celebrating neurodiversity.' },
   { name: 'The Curious Incident of the Dog in the Night-Time -- Mark Haddon', description: 'Christopher, a boy with autism, investigates the death of a neighbor\'s dog, leading him on a journey of self-discovery and independence as he unravels family secrets.' },
   { name: 'The Rosie Project -- Graeme Simsion', description: 'Don Tillman, a socially awkward genetics professor with traits of autism, embarks on a journey to find love, resulting in humorous and heartwarming moments of self-realization and growth.' },
-  { name: 'A Different Sort of Normal -- Abigail Balfe', description: 'A personal memoir of the author’s experiences growing up as an autistic woman, offering insights into self-acceptance, societal expectations, and navigating life on the spectrum.' },
+  { name: 'A Different Sort of Normal -- Abigail Balfe', description: 'A personal memoir of the author\'s experiences growing up as an autistic woman, offering insights into self-acceptance, societal expectations, and navigating life on the spectrum.' },
   { name: 'NeuroTribes: The Legacy of Autism and the Future of Neurodiversity -- Steve Silberman', description: 'This comprehensive history of autism traces its origins, explores scientific understanding, and advocates for a more inclusive view of neurodiversity in modern society.' },
   { name: 'Neurodiversity in the Classroom: Strength-Based Strategies to Help Students with Special Needs Succeed in School and Life -- Thomas Armstrong', description: 'An excellent resource for teachers that focuses on practical, strength-based strategies to support neurodivergent students, such as those with autism, ADHD, dyslexia, and other learning differences.' }
 
@@ -309,10 +293,8 @@ perspectives_kit.kit_items << goldfish_boy_book << sevens_book << frankie_book <
 impact_kit.kit_items << curious_dog_book << rosie_book << different_book << classroom_book << neurotribes_book
 
 # Seeding KitRequests
-teacher = Teacher.first
-teacher2 = Teacher.last
 
 KitRequest.create([
-  { grade_level: 'PK-2', school_year: '2024-2025', teacher: teacher, kit: discovery_kit },
-  { grade_level: '3-5', school_year: '2024-2025', teacher: teacher2, kit: empowerment_kit }
+  { grade_level: 'PK-2', school_year: '2024-2025', kit: discovery_kit },
+  { grade_level: '3-5', school_year: '2024-2025', kit: empowerment_kit }
 ])

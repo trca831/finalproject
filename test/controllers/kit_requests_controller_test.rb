@@ -12,7 +12,7 @@ class KitRequestsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create kit_request" do
     assert_difference("KitRequest.count") do
-      post kit_requests_url, params: { kit_request: { grade_level: @kit_request.grade_level, kit_id: @kit_request.kit_id, school_year: @kit_request.school_year, teacher_id: @kit_request.teacher_id } }, as: :json
+      post kit_requests_url, params: { kit_request: { grade_level: @kit_request.grade_level, kit_id: @kit_request.kit_id, school_year: @kit_request.school_year } }, as: :json
     end
 
     assert_response :created
@@ -24,7 +24,7 @@ class KitRequestsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update kit_request" do
-    patch kit_request_url(@kit_request), params: { kit_request: { grade_level: @kit_request.grade_level, kit_id: @kit_request.kit_id, school_year: @kit_request.school_year, teacher_id: @kit_request.teacher_id } }, as: :json
+    patch kit_request_url(@kit_request), params: { kit_request: { grade_level: @kit_request.grade_level, kit_id: @kit_request.kit_id, school_year: @kit_request.school_year } }, as: :json
     assert_response :success
   end
 

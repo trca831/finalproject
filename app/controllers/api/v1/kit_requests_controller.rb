@@ -46,6 +46,6 @@ class Api::V1::KitRequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def kit_request_params
-      params.require(:kit_request).permit(:grade_level, :school_year, :teacher_id, :kit_id)
+      params.require(:kit_request).permit(:grade_level, :school_year, :kit_id)
     end
 end
