@@ -30,6 +30,10 @@ gem "bootsnap", require: false
 gem "rack-cors"
 gem "active_model_serializers"
 gem "truemail"
+gem "devise"
+gem "devise-jwt"
+gem "cancancan"
+gem "jsonapi-serializer"
 
 
 group :development, :test do

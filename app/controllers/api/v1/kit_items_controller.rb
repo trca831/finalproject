@@ -1,5 +1,6 @@
 class Api::V1::KitItemsController < ApplicationController
   before_action :set_kit_item, only: %i[ show update destroy ]
+  skip_before_action :authenticate_user!
 
   # GET /kit_items
   def index

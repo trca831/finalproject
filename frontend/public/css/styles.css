@@ -11341,6 +11341,62 @@ section#contact form#contactForm :-ms-input-placeholder {
   color: #ced4da;
 }
 
+section#register {
+  background-color: #212529;
+  background-image: url("../assets/img/empty-blackboard.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+section#register .section-heading {
+  color: #fff;
+}
+
+section#register form#registerForm .form-group {
+  margin-bottom: 1.5rem;
+}
+section#register form#registerForm .form-group input,
+section#register form#registerForm .form-group textarea {
+  padding: 1.25rem;
+}
+section#register form#registerForm .form-group input.form-control {
+  height: auto;
+}
+section#register form#registerForm .form-group-textarea {
+  height: 100%;
+}
+section#register form#registerForm .form-group-textarea textarea {
+  height: 100%;
+  min-height: 10rem;
+}
+section#register form#registerForm p.help-block {
+  margin: 0;
+}
+section#register form#registerForm .form-control:focus {
+  border-color: #ffc800;
+  box-shadow: none;
+}
+section#register form#registerForm ::-webkit-input-placeholder {
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 700;
+  color: var(--bs-gray);
+}
+section#register form#registerForm :-moz-placeholder {
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 700;
+  color: #ced4da;
+}
+section#register form#registerForm ::-moz-placeholder {
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 700;
+  color: #ced4da;
+}
+section#register form#registerForm :-ms-input-placeholder {
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 700;
+  color: #ced4da;
+}
+
 .footer {
   text-align: center;
   font-size: 0.9rem;

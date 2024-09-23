@@ -3,10 +3,10 @@ import Navigation from './Navigation';
 import Footer from './Footer';
 
 
-const PageWrapper = ({children}) => (
+const PageWrapper = ({children, loggedIn, setLoggedIn }) => (
 
     <div id="page-top">
-    <Navigation/>
+    <Navigation loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
     {children}     
     <Footer/>
     </div>

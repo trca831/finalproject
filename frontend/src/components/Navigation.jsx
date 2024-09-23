@@ -1,7 +1,12 @@
 import React from "react"
 import { Link } from "react-router-dom";
+import Registration from "./auth/Registration";
+import Logout from "./auth/Logout";
 
-function Navigation() {
+function Navigation({ loggedIn, setLoggedIn }) {
+    const handleLogout = () => {
+        setLoggedIn(false);
+    }
     return (
         <>
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -18,7 +23,18 @@ function Navigation() {
                         <li className="nav-item"><a className="nav-link" href="/#team">Team</a></li>
                         <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/kits">Browse Kits</Link></li>
-                        <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>                       
+                        <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
+                        
+                        {loggedIn ? (
+                            <>
+                            <li><Logout /></li>
+                            </>
+                        ) : (
+                            <>
+                            <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
+                            </>
+                        )}
+                                             
                     </ul>
                 </div>
             </div>
