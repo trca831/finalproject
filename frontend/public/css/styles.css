@@ -11341,12 +11341,9 @@ section#contact form#contactForm :-ms-input-placeholder {
   color: #ced4da;
 }
 
+
 section#register {
-  background-color: #212529;
-  background-image: url("../assets/img/empty-blackboard.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-color: white;
 }
 section#register .section-heading {
   color: #fff;

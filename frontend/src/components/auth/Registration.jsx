@@ -69,10 +69,10 @@ export default function Registration() {
       <section className="page-section" id="register">
         <div className="container mt-3">
           <div className="text-center mb-5">
-            <h2 className="section-heading text-uppercase">Register</h2>
+            <h2 className="section-heading text-uppercase text-dark">Register</h2>
           </div>
 
-          <div className={registrationMessages ? "text-center text-white text-bold mb-3" : "d-none"} id="submitErrorMessage">
+          <div className={registrationMessages ? "text-center text-danger text-bold mb-3" : "d-none"} id="submitErrorMessage">
             {registrationMessages && <p>{registrationMessages}</p>}
             </div>
 
@@ -87,7 +87,7 @@ export default function Registration() {
               <div>
                 <div className="form-group">
                   <input
-                    className="form-control border border-dark"
+                    className="form-control shadow"
                     id="name"
                     type="text"
                     name="name"
@@ -105,7 +105,7 @@ export default function Registration() {
                 </div>
                 <div className="form-group">
                   <input
-                    className="form-control border border-dark"
+                    className="form-control shadow"
                     id="email"
                     type="email"
                     name="email"
@@ -126,7 +126,7 @@ export default function Registration() {
                 </div>
                 <div className="form-group mb-md-0">
                   <input
-                    className="form-control border border-dark"
+                    className="form-control shadow"
                     id="password"
                     type="password"
                     name="password"
@@ -154,7 +154,7 @@ export default function Registration() {
 
             <div className="text-center">
               <button
-                className="btn btn-primary btn-lg text-uppercase mb-3"
+                className="btn btn-primary btn-lg text-uppercase mb-3 shadow"
                 id="submitButton"
                 type="submit"
               >

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { API_URL } from "../../constants";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Kits() {
+function Kits({user, setUser}) {
   const [kits, setKits] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const kitsUrl = `${API_URL}/kits`;
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadKits() {
@@ -28,6 +30,20 @@ function Kits() {
     }
     loadKits();
   }, [kitsUrl]);
+
+  const handleRequestKit = (kitId) => {
+    if (!user) {
+      // Alert the user that they must log in first
+      alert('You must log in to request a kit.');
+  
+      // Navigate to the login page
+      navigate('/login');
+    } else {
+      // If the user exists, navigate to the RequestKit page and pass kitId as state
+      navigate('/kit_requests', { state: { kitId } });
+    }
+  };
+  
 
   return (
     <>
@@ -75,11 +91,11 @@ function Kits() {
                             <p>Grades: {kit.grade_level}</p>
                             {kit.description}
                           </div>
-                          <Link to="/kit_request">
-                            <button className="btn btn-primary btn-small">
-                              Request Kit
+                          
+                            <button className="btn btn-primary btn-small" onClick= {() => handleRequestKit(kit.id)}>
+                              Request {kit.name}
                             </button>
-                          </Link>
+                          
                         </div>
 
                         <div

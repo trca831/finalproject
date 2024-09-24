@@ -46,7 +46,12 @@ export default function Login({setLoggedIn}) {
         if (response.ok) {
           // Handle successful registration (e.g., redirect to another page)
           const data = await response.json()
-          localStorage.setItem('jwt', data.token);
+          const jwt = response.headers.get('Authorization');
+      if (jwt) {
+        // Store the JWT in local storage (optional: remove 'Bearer ' part)
+        localStorage.setItem('jwt', jwt.split(' ')[1]);
+        console.log(localStorage.getItem('jwt'));
+      }
 
           console.log("Login successful!");
           
@@ -78,16 +83,15 @@ export default function Login({setLoggedIn}) {
         <section className="page-section" id="register">
           <div className="container mt-3">
             <div className="text-center mb-5">
-              <h2 className="section-heading text-uppercase">Login</h2>
+              <h2 className="section-heading text-uppercase text-dark">Login</h2>
             </div>
-  
-            <div className={loginMessages ? "text-center text-white text-bold mb-3" : "d-none"} id="submitErrorMessage">
+            
+            <div className={loginMessages ? "text-center text-danger text-bold mb-3" : "d-none"} id="submitErrorMessage">
               {loginMessages && <p>{loginMessages}</p>}
               </div>
   
             <form
               id="registerForm"
-              data-sb-form-api-token="API_TOKEN"
               onSubmit={handleSubmit}
               
             >
@@ -96,7 +100,7 @@ export default function Login({setLoggedIn}) {
               <div className="mb-5">
                 <div className="form-group">
                     <input
-                      className="form-control border border-dark"
+                      className="form-control shadow"
                       id="email"
                       type="email"
                       name="email"
@@ -117,7 +121,7 @@ export default function Login({setLoggedIn}) {
                   </div>
                   <div className="form-group mb-md-0">
                     <input
-                      className="form-control border border-dark"
+                      className="form-control shadow"
                       id="password"
                       type="password"
                       name="password"
@@ -145,7 +149,7 @@ export default function Login({setLoggedIn}) {
   
               <div className="text-center">
                 <button
-                  className="btn btn-primary btn-lg text-uppercase mb-3"
+                  className="btn btn-primary btn-lg text-uppercase mb-3 shadow"
                   id="submitButton"
                   type="submit"
                 >

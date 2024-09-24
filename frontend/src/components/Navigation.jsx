@@ -1,12 +1,12 @@
 import React from "react"
 import { Link } from "react-router-dom";
-import Registration from "./auth/Registration";
+import CurrentUser from "./auth/CurrentUser";
 import Logout from "./auth/Logout";
 
-function Navigation({ loggedIn, setLoggedIn }) {
-    const handleLogout = () => {
-        setLoggedIn(false);
-    }
+function Navigation({ loggedIn, setLoggedIn, setUser, user }) {
+    // const handleLogout = () => {
+    //     setLoggedIn(false);
+    // }
     return (
         <>
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -18,19 +18,25 @@ function Navigation({ loggedIn, setLoggedIn }) {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                     <ul className="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li className="nav-item"><a className="nav-link" href="/">Home</a></li>
+                        {loggedIn && (
+                        <>
+                        <li className="nav-item"><span className="nav-link"><CurrentUser setLoggedIn={setLoggedIn} setUser={setUser} user={user} /></span></li>
+
+                        </>
+                        )}
+                        <li className="nav-item"><a className="nav-link ms-5" href="/">Home</a></li>
                         <li className="nav-item"><a className="nav-link" href="/#services">Services</a></li>
                         <li className="nav-item"><a className="nav-link" href="/#team">Team</a></li>
                         <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
-                        <li className="nav-item"><Link className="nav-link" to="/kits">Browse Kits</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
+                        
                         
                         {loggedIn ? (
                             <>
-                            <li><Logout /></li>
+                            <li><Logout setLoggedIn={setLoggedIn} /></li>
                             </>
                         ) : (
-                            <>
+                            <>                            
                             <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
                             </>
                         )}
