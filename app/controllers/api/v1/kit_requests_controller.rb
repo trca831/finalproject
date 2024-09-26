@@ -1,53 +1,47 @@
 class Api::V1::KitRequestsController < ApplicationController
-  load_and_authorize_resource
-  before_action :set_kit_request, only: %i[ show update destroy ]
   before_action :authenticate_user!
+  load_and_authorize_resource
 
-  # GET /kit_requests
+  # GET /api/v1/kit_requests
   def index
-    kit_requests = current_user.kit_requests
-
-    render json: kit_requests
+    kit_requests = current_user.admin? ? KitRequest.all : current_user.kit_requests
+    render json: kit_requests, status: :ok
   end
 
-  # GET /kit_requests/1
-  def show
-    render json: kit_request
-  end
-
-  # POST /kit_requests
+  # POST /api/v1/kit_requests
   def create
-    kit_request = current_user.kit_requests.new(kit_request_params)
+    @kit_request.user = current_user # Automatically associate user
 
-    if kit_request.save
-      render json: kit_request, status: :created, location: @kit_request
+    if @kit_request.save
+      render json: @kit_request, status: :created
     else
-      render json: kit_request.errors, status: :unprocessable_entity
+      render json: { errors: @kit_request.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /kit_requests/1
+  # GET /api/v1/kit_requests/:id
+  def show
+    render json: @kit_request, status: :ok
+  end
+
+  # PATCH/PUT /api/v1/kit_requests/:id
   def update
-    if kit_request.update(kit_request_params)
-      render json: kit_request
+    if @kit_request.update(kit_request_params)
+      render json: @kit_request, status: :ok
     else
-      render json: kit_request.errors, status: :unprocessable_entity
+      render json: { errors: @kit_request.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
-  # DELETE /kit_requests/1
+  # DELETE /api/v1/kit_requests/:id
   def destroy
-    kit_request.destroy!
+    @kit_request.destroy
+    head :no_content
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_kit_request
-      @kit_request = KitRequest.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def kit_request_params
-      params.require(:kit_request).permit(:grade_level, :school_year, :kit_id)
-    end
+  def kit_request_params
+    params.require(:kit_request).permit(:phone, :school_name, :school_address, :school_year, :kit_id, :comments)
+  end
 end

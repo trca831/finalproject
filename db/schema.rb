@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_21_000629) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_24_143511) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -52,12 +52,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_21_000629) do
   end
 
   create_table "kit_requests", force: :cascade do |t|
-    t.string "grade_level"
     t.string "school_year"
     t.integer "kit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "phone"
+    t.string "school_name"
+    t.string "school_address"
+    t.text "comments"
+    t.integer "user_id"
     t.index ["kit_id"], name: "index_kit_requests_on_kit_id"
+    t.index ["user_id"], name: "index_kit_requests_on_user_id"
   end
 
   create_table "kits", force: :cascade do |t|
@@ -87,4 +92,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_21_000629) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "kit_requests", "kits"
+  add_foreign_key "kit_requests", "users"
 end

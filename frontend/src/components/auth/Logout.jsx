@@ -50,9 +50,12 @@ export default function Logout({ setLoggedIn }) {
 
       } else {
         const message = response.json();
-        setErrorMessage(message)
-        console.error('Logout failed')
-        alert({errorMessage})
+        setErrorMessage(message);
+        console.error(errorMessage);
+        alert("Your session has expired, please sign in again.");
+        setLoggedIn(false);
+        navigate("/login")
+
     }
 
     } catch (error) {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL2 } from "../../constants";
 import { Link } from "react-router-dom";
+import CurrentUser from "./CurrentUser";
 
 
 
@@ -44,11 +45,11 @@ export default function Login({setLoggedIn}) {
         });
   
         if (response.ok) {
-          // Handle successful registration (e.g., redirect to another page)
+          // Handle successful registration 
           const data = await response.json()
           const jwt = response.headers.get('Authorization');
       if (jwt) {
-        // Store the JWT in local storage (optional: remove 'Bearer ' part)
+        // Store the JWT in local storage 
         localStorage.setItem('jwt', jwt.split(' ')[1]);
         console.log(localStorage.getItem('jwt'));
       }
@@ -56,11 +57,9 @@ export default function Login({setLoggedIn}) {
           console.log("Login successful!");
           
           setLoggedIn(true);
-          
-          
-
-                      
-          // Clear input fields
+          <CurrentUser />
+                                
+        // Clear input fields
         setEmail("");
         setPassword("");
         
@@ -69,10 +68,10 @@ export default function Login({setLoggedIn}) {
         } else {
           // Handle registration error
           const errorData = await response.json();
-          setLoginMessages(errorData.status.errors.join(", ") || "Login failed");
+          setLoginMessages(errorData.errors.join(", ") || "Login failed");
         }
       } catch (error) {
-        // Handle network or other errors
+        // Handle other errors
         setLoginMessages("An error occurred: " + error.message);
         console.log(error.message)
       }
@@ -81,7 +80,12 @@ export default function Login({setLoggedIn}) {
     return (
       <div>
         <section className="page-section" id="register">
-          <div className="container mt-3">
+          <div className="container mt-5 p-5 rounded bg-light w-50"  style={{
+            boxShadow: '25px 25px 55px rgba(0, 0, 0, 0.5)', 
+            borderTop: '1.5px solid rgba(255, 255, 255, 0.5)',
+            borderLeft: '1.5px solid rgba(255, 255, 255, 0.5)',
+            backdropFilter: 'blur(10px) '
+  }}>
             <div className="text-center mb-5">
               <h2 className="section-heading text-uppercase text-dark">Login</h2>
             </div>
@@ -96,7 +100,7 @@ export default function Login({setLoggedIn}) {
               
             >
             <div>
-              <div className="container w-50">
+              <div className="container w-80">
               <div className="mb-5">
                 <div className="form-group">
                     <input
@@ -140,14 +144,7 @@ export default function Login({setLoggedIn}) {
                 </div>
               </div>
               </div>
-  
-              {/* <div className="d-none" id="submitSuccessMessage">
-                      <div className="text-center text-primary mb-3">Message sent!</div> 
-                      </div> */}
-  
-              
-  
-              <div className="text-center">
+               <div className="text-center">
                 <button
                   className="btn btn-primary btn-lg text-uppercase mb-3 shadow"
                   id="submitButton"

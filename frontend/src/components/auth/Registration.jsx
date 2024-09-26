@@ -67,7 +67,11 @@ export default function Registration() {
   return (
     <div>
       <section className="page-section" id="register">
-        <div className="container mt-3">
+      <div className="container mt-5 p-5 rounded bg-light w-50"  style={{
+            boxShadow: '25px 25px 55px rgba(0, 0, 0, 0.5)', 
+            borderTop: '1.5px solid rgba(255, 255, 255, 0.5)',
+            borderLeft: '1.5px solid rgba(255, 255, 255, 0.5)',
+            backdropFilter: 'blur(10px) '}}>
           <div className="text-center mb-5">
             <h2 className="section-heading text-uppercase text-dark">Register</h2>
           </div>
@@ -82,7 +86,7 @@ export default function Registration() {
             onSubmit={handleSubmit}
             
           >
-            <div className="container w-50">
+            <div className="container w-75">
             <div className="mb-5">
               <div>
                 <div className="form-group">

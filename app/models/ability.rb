@@ -7,15 +7,14 @@ class Ability
     if user.role == "admin"
       can :manage, :all # Admins can manage everything
     else
-      # Define permissions for non-admin users
-      can :read, :all # Regular users can read everything
-
-      # Example of more specific permissions:
       # Allow users to update their own profile
       can :update, User, id: user.id
+      can :read, KitRequest, user_id: user.id # Users can read their own kit requests
+      can :create, KitRequest # Users can create new kit requests
+      can [ :update, :destroy ], KitRequest, user_id: user.id # Users can update or destroy their own kit requests
+      can :read, Kit
+      can :read, KitItem
 
-      # Example for another model, like 'Member':
-      can :manage, Member, user_id: user.id # Allow users to manage their own members
     end
   end
 end

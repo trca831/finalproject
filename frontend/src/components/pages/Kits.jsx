@@ -31,12 +31,12 @@ function Kits({user, setUser}) {
     loadKits();
   }, [kitsUrl]);
 
+  // Stretch Goal: Send user back to the resource they requested after login
   const handleRequestKit = (kitId) => {
     if (!user) {
       // Alert the user that they must log in first
       alert('You must log in to request a kit.');
   
-      // Navigate to the login page
       navigate('/login');
     } else {
       // If the user exists, navigate to the RequestKit page and pass kitId as state
@@ -97,29 +97,30 @@ function Kits({user, setUser}) {
                             </button>
                           
                         </div>
-
+                        <div>
                         <div
-                          class="portfolio-modal modal fade"
+                          className="portfolio-modal modal fade"
                           id={`portfolioModal${kit.id}`}
                           tabindex="-1"
                           role="dialog"
                           aria-hidden="true"
                           key={kit.id}
+                          style={{ marginLeft: 100}}
                         >
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="close-modal" data-bs-dismiss="modal">
+                          <div className="modal-dialog modal-dialog-centered" role="document">
+                            <div className="modal-content">
+                              <div className="close-modal" data-bs-dismiss="modal">
                                 <img
                                   src="assets/img/close-icon.svg"
                                   alt="Close modal"
                                 />
                               </div>
-                              <div class="container">
-                                <div class="row justify-content-center">
-                                  <div class="col-lg-8">
-                                    <div class="modal-body">
-                                      <h2 class="text-uppercase">{kit.name}</h2>
-                                      <p class="item-intro text-muted">
+                              <div className="container">
+                                <div className="row justify-content-center">
+                                  <div className="col-lg-8">
+                                    <div className="modal-body">
+                                      <h2 className="text-uppercase">{kit.name}</h2>
+                                      <p className="item-intro text-muted">
                                         {kit.description}
                                       </p>
 
@@ -202,6 +203,7 @@ function Kits({user, setUser}) {
                               </div>
                             </div>
                           </div>
+                        </div>
                         </div>
                       </div>
                     </div>

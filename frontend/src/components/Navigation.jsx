@@ -30,6 +30,7 @@ function Navigation({ loggedIn, setLoggedIn, setUser, user }) {
                         <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
                         
+                        <li className="nav-item"><Link className="nav-link" to="/confirmation">Confirmation</Link></li>
                         
                         {loggedIn ? (
                             <>

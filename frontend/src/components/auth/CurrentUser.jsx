@@ -23,7 +23,7 @@ const CurrentUser = ({ setLoggedIn, setUser, user }) => {
                     console.log(error)
                 }
             } catch (error) {
-                console.error("Error fetching current user:", error);
+                console.error("Error fetching current user");
             }
         };
 
@@ -34,7 +34,7 @@ const CurrentUser = ({ setLoggedIn, setUser, user }) => {
 
     return (
         <div className='m-0 p-0'>
-            <p className='text-white bold me-5'><em><strong>Welcome, {user.name}!</strong></em></p>
+            <p className='text-white bold' style={{marginRight: 80}}><em><strong>Welcome, {user.name}!</strong></em></p>
             {user.role === 'admin' && <Link to="/admin">Admin Dashboard</Link>}
         </div>
     );

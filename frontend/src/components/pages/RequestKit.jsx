@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { API_URL } from "../../constants";
-import { useLocation } from 'react-router-dom'
+import { API_URL, API_URL2 } from "../../constants";
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
 
 function RequestKit({ user }) {
     const location = useLocation();
-    const { kitId } = location.state;
+    const kitId = location.state?.kitId || ""; 
+
     const [requestMessages, setRequestMessages] = useState("");
 
     // Predefine name, email, and kitId
@@ -13,32 +14,81 @@ function RequestKit({ user }) {
     const [email, setEmail] = useState(user ? user.email : "");
     const [, setKitId] = useState(kitId || "");
 
+
     // Other inputs
     const [phone, setPhone] = useState("");
-    const [school, setSchool] = useState("");
-    const [address, setAddress] = useState("");
+    const [schoolName, setSchoolName] = useState("");
+    const [schoolAddress, setSchoolAddress] = useState("");
     const [comments, setComments] = useState("");
-    const [gradeLevel, setGradeLevel] = useState("");
     const [schoolYear, setSchoolYear] = useState("");
+    const requestKitUrl = `${API_URL}/kit_requests`
+    const jwt = localStorage.getItem('jwt');
+    const navigate = useNavigate();
+    
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = {
-            name,
-            email,
-            phone,
-            address,
-            school,            
-            gradeLevel,
-            schoolYear,
-            kitId,
-            comments,
+          kit_request: {
+          phone,
+          school_address: schoolAddress,
+          school_name: schoolName,       
+          school_year: schoolYear,      
+          kit_id: kitId,     
+          comments,
+          }
 
         }
 
         console.log("Submitting form data: ", formData);
-    };
+        console.log(jwt)
+        if (!jwt) {
+          console.log("No user logged in. Please log in to continue.");
+          // Redirect to login
+          navigate('/login')
+          return;
+      }
+    
+
+    try {
+      // Send POST request to registration endpoint
+      const response = await fetch(requestKitUrl, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${jwt}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Handle successful registration
+        console.log("Request saved.");
+        alert("Your request has been processed.")
+
+        // Clear input fields
+      setPhone("");
+      setSchoolName("");
+      setSchoolYear("");
+      setSchoolAddress("");
+      setComments("");
+
+      navigate("/confirmation")
+      } else {
+        // Handle request error
+        const errorData = await response.json();
+        const errorMessages = errorData.errors.map(error => {
+          return error.replace("School year ", ""); // Remove the attribute name if desired
+      });
+        setRequestMessages(errorMessages.join(", ") || "Request failed");
+      }
+    } catch (error) {
+      // Handle network or other errors
+      setRequestMessages("An error occurred: " + error.message);
+      console.log(error)
+    }
+  };
 
     return(
         <>
@@ -96,7 +146,9 @@ function RequestKit({ user }) {
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="123-456-7890*"
                     data-sb-validations="required"
+                    required
                   />
+                  </div>
                   <div
                     className="invalid-feedback"
                     data-sb-feedback="phone:required"
@@ -104,113 +156,48 @@ function RequestKit({ user }) {
                     A phone number is required.
                   </div>
                   <div className="form-group">
-                    <label htmlFor="school">School Name:</label>
+                    <label htmlFor="schoolName">School Name:</label>
                   <input
                     className="form-control shadow mb-5"
-                    id="school"
+                    id="schoolName"
                     type="text"
-                    name="school"
-                    value={school}
-                    onChange={(e) => setSchool(e.target.value)}
+                    name="schoolName"
+                    value={schoolName}
+                    onChange={(e) => setSchoolName(e.target.value)}
                     placeholder="City High School*"
                     data-sb-validations="required"
+                    required
                   />
                   <div
                     className="invalid-feedback"
-                    data-sb-feedback="school:required"
+                    data-sb-feedback="schoolName:required"
                   >
-                    A school is required.
+                    A school name is required.
                   </div>
                 </div>
                   {/* Stretch Goal: Integrate API with US schools? */}
                   <div className="form-group">
-                    <label htmlFor="address">School Address:</label>
+                    <label htmlFor="schoolAddress">School Address:</label>
                   <input
                     className="form-control shadow mb-5"
-                    id="address"
+                    id="schoolAddress"
                     type="text"
-                    name="address"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
+                    name="schoolAddress"
+                    value={schoolAddress}
+                    onChange={(e) => setSchoolAddress(e.target.value)}
                     placeholder="123 Example Street, City, ST 12345*"
                     data-sb-validations="required"
+                    required
                   />
                   <div
                     className="invalid-feedback"
-                    data-sb-feedback="address:required"
+                    data-sb-feedback="schoolAddress:required"
                   >
-                    An address is required.
+                    A school address is required.
                   </div>
                 </div>
                 </div>
-                
-                <div className="form-group">
-                <label className="me-1">Grade Level:</label>
-                    <div className="form-check form-check-inline">
-                        <input
-                        className="form-check-input"
-                        type="radio"
-                        name="gradeLevel"
-                        id="pk-2"
-                        value="PK-2"
-                        checked={gradeLevel === "PK-2"}
-                        onChange={(e) => setGradeLevel(e.target.value)}
-                        required
-                        />
-                        <label className="form-check-label" htmlFor="pk-2">
-                        PK-2
-                        </label>
-                    </div>
-
-                    <div className="form-check form-check-inline">
-                        <input
-                        className="form-check-input"
-                        type="radio"
-                        name="gradeLevel"
-                        id="3-5"
-                        value="3-5"
-                        checked={gradeLevel === "3-5"}
-                        onChange={(e) => setGradeLevel(e.target.value)}
-                        required
-                        />
-                        <label className="form-check-label" htmlFor="3-5">
-                        3-5
-                        </label>
-                    </div>
-
-                    <div className="form-check form-check-inline">
-                        <input
-                        className="form-check-input"
-                        type="radio"
-                        name="gradeLevel"
-                        id="6-8"
-                        value="6-8"
-                        checked={gradeLevel === "6-8"}
-                        onChange={(e) => setGradeLevel(e.target.value)}
-                        required
-                        />
-                        <label className="form-check-label" htmlFor="6-8">
-                        6-8
-                        </label>
-                    </div>
-
-                    <div className="form-check form-check-inline">
-                        <input
-                        className="form-check-input"
-                        type="radio"
-                        name="gradeLevel"
-                        id="9-12"
-                        value="9-12"
-                        checked={gradeLevel === "9-12"}
-                        onChange={(e) => setGradeLevel(e.target.value)}
-                        required
-                        />
-                        <label className="form-check-label" htmlFor="9-12">
-                        9-12
-                        </label>
-                    </div>
-                </div>
-                <div className="form-group">
+                  <div className="form-group">
                     <label htmlFor="schoolYear">School Year:</label>
                   <input
                     className="form-control shadow mb-5"
@@ -219,17 +206,17 @@ function RequestKit({ user }) {
                     name="schoolYear"
                     value={schoolYear}
                     onChange={(e) => setSchoolYear(e.target.value)}
-                    placeholder="YYYY-YYYY *"
+                    placeholder="YYYY-YYYY*"
                     data-sb-validations="required"
+                    required
                   />
                   <div
                     className="invalid-feedback"
                     data-sb-feedback="schoolYear:required"
                   >
-                    A valid school year is required.
+                    A school year is required.
                   </div>
-                  </div>
-                  <div className="form-group">
+                 <div className="form-group">
                     <label htmlFor="kitId">Kit Id:</label>
                   <input
                     className="form-control shadow mb-5"

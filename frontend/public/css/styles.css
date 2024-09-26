@@ -2708,7 +2708,7 @@ textarea.form-control-lg {
 .was-validated .form-control:invalid, .form-control.is-invalid {
   border-color: #dc3545;
   padding-right: calc(1.5em + 0.75rem);
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+  : url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right calc(0.375em + 0.1875rem) center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
@@ -10991,7 +10991,7 @@ header.masthead .masthead-heading {
 
 .portfolio-img {
   max-height: 300px;
-  width: 26rem;
+  width: 30rem;
 }
 
 #portfolio .portfolio-item {
@@ -11033,14 +11033,15 @@ header.masthead .masthead-heading {
   font-weight: 700;
   margin-bottom: 0;
 }
-#portfolio .portfolio-item .portfolio-caption .portfolio-caption-subheading {
+#portfolio .portfolio-item .portfolio-caption .portfolio-caption-subheading #confirmation {
   font-style: italic;
   font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .portfolio-modal .modal-dialog {
   margin: 1rem;
-  max-width: 100vw;
+  max-width: 80vw;
+  
 }
 .portfolio-modal .modal-content {
   padding-top: 6rem;
@@ -11343,7 +11344,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 
 section#register {
-  background-color: white;
+  background-color: var(--bs-gray-500);
 }
 section#register .section-heading {
   color: #fff;
@@ -11392,6 +11393,14 @@ section#register form#registerForm :-ms-input-placeholder {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   color: #ced4da;
+}
+
+#confirmation {
+  background-image: url("../assets/img/confetti1.jpeg");
+  background-position: center;
+  background-size: cover;
+  padding-top: 10.5rem;
+  padding-bottom: 6rem;
 }
 
 .footer {
