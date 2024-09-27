@@ -2,19 +2,19 @@ class Api::V1::KitItemsController < ApplicationController
   before_action :set_kit_item, only: %i[ show update destroy ]
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
-  # GET /kit_items
+  # GET /api/v1/kit_items
   def index
     kit = Kit.find(params[:kit_id])
     kit_items = kit.kit_items
     render json: kit_items
   end
 
-  # GET /kit_items/1
+  # GET /api/v1/kit_items/1
   def show
     render json: @kit_item
   end
 
-  # POST /kit_items
+  # POST /api/v1/kit_items
   def create
     @kit_item = KitItem.new(kit_item_params)
 
@@ -25,7 +25,7 @@ class Api::V1::KitItemsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /kit_items/1
+  # PATCH/PUT /api/v1/kit_items/1
   def update
     if @kit_item.update(kit_item_params)
       render json: @kit_item
@@ -34,7 +34,7 @@ class Api::V1::KitItemsController < ApplicationController
     end
   end
 
-  # DELETE /kit_items/1
+  # DELETE /api/v1/kit_items/1
   def destroy
     @kit_item.destroy!
   end

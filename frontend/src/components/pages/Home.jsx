@@ -33,7 +33,7 @@ function Home() {
                         </span>
                         <h4 className="my-3">Invite an Expert</h4>
                         <p className="text-muted">We offer the opportunity for schools to host expert speakers on neurodiversity. Our engaging talks are designed to enrich your educational environment with valuable insights and knowledge about neurodiversity.</p>
-                        <a className="btn btn-primary btn-small text-uppercase" href="#">Request a Speaker</a>
+                        <Link className="btn btn-primary btn-small text-uppercase" to="/speaker">Request a Speaker</Link>
                     </div>
                     <div className="col-md-4">
                         <span className="fa-stack fa-4x">
@@ -42,7 +42,7 @@ function Home() {
                         </span>
                         <h4 className="my-3">Support Our Mission</h4>
                         <p className="text-muted">Your generous donations provide free kits for teachers, including books and lesson plans that educate and raise awareness about neurodiversity, fostering inclusivity and understanding in the classroom. Your support also helps bring inspiring guest speakers to schools across the country, further promoting a more inclusive educational environment.</p>
-                        <a className="btn btn-primary btn-small text-uppercase" href="#">Donate Now</a>
+                        <Link className="btn btn-primary btn-small text-uppercase" to="/donation">Donate Now</Link>
                     </div>
                     
                 </div>

@@ -34,7 +34,9 @@ const CurrentUser = ({ setLoggedIn, setUser, user }) => {
 
     return (
         <div className='m-0 p-0'>
-            <p className='text-white bold' style={{marginRight: 80}}><em><strong>Welcome, {user.name}!</strong></em></p>
+            <p className='text-white bold' style={{ marginRight: 100 }}>
+            <em>Welcome, {user.name.split(' ')[0]}!</em>
+            </p>
             {user.role === 'admin' && <Link to="/admin">Admin Dashboard</Link>}
         </div>
     );

@@ -9,9 +9,12 @@ import RequestKit from './components/pages/RequestKit'
 import Registration from './components/auth/Registration';
 import Login from './components/auth/Login';
 import ScrollToHash from './components/ScrollToHash';
-import CurrentUser from './components/auth/CurrentUser';
 import { useState, useEffect } from 'react';
 import Confirmation from './components/pages/Confirmation';
+import Donation from './components/pages/Donation';
+import RequestSpeaker from './components/pages/RequestSpeaker';
+import { jwtDecode } from 'jwt-decode';
+
 
 
 
@@ -19,6 +22,7 @@ import Confirmation from './components/pages/Confirmation';
 function App() {
   const [loggedIn, setLoggedIn] = useState();
   const [user, setUser] = useState(null);
+  
   
   
   useEffect(() => {
@@ -30,15 +34,25 @@ function App() {
         
         if (decoded.exp > now) {
           setLoggedIn(true); //Token is not expired
+          if (decoded.user) {
+            setUser(decoded.user); // Set user if present
+            console.log(decoded.user)
+        } else {
+            setUser(null); // User data is not in the token
+        }
         } else {
           setLoggedIn(false); // Token is expired
+          setUser(null);
         }
       } catch (error) {
         console.error('Token decoding failed:', error);
         setLoggedIn(false);
+        setUser(null);
+
       }
     } else {
       setLoggedIn(false);
+      setUser(null);
     }
   }, []);
 
@@ -57,6 +71,8 @@ function App() {
             <Route path="/registration" element={<Registration />} />
             <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />}/>
             <Route path="/confirmation" element={<Confirmation user={user}/> } />
+            <Route path="/donation" element={<Donation user={user}/>} />
+            <Route path="/speaker" element={<RequestSpeaker/>}/>
           </Routes>
         </PageWrapper>
       </Router>

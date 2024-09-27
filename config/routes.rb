@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   # API routes
   namespace :api do
     namespace :v1 do
-      resources :kit_requests, only: [:index, :create, :show, :update, :destroy ] do
+      resources :donations
+      resources :kit_requests, only: [ :index, :create, :show, :update, :destroy ] do
         collection do
           get "current", to: "kit_requests#current"
         end

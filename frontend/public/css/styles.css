@@ -11350,6 +11350,26 @@ section#register .section-heading {
   color: #fff;
 }
 
+.speaker {
+  background-image: url("/assets/img/under-construction.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  opacity: 0.75;
+}
+
+.black-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 75px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10;
+}
+
 section#register form#registerForm .form-group {
   margin-bottom: 1.5rem;
 }

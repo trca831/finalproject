@@ -85,7 +85,7 @@ export default function Login({setLoggedIn}) {
             borderTop: '1.5px solid rgba(255, 255, 255, 0.5)',
             borderLeft: '1.5px solid rgba(255, 255, 255, 0.5)',
             backdropFilter: 'blur(10px) '
-  }}>
+            }}>
             <div className="text-center mb-5">
               <h2 className="section-heading text-uppercase text-dark">Login</h2>
             </div>

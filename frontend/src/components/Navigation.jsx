@@ -1,12 +1,22 @@
 import React from "react"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CurrentUser from "./auth/CurrentUser";
 import Logout from "./auth/Logout";
 
 function Navigation({ loggedIn, setLoggedIn, setUser, user }) {
-    // const handleLogout = () => {
-    //     setLoggedIn(false);
-    // }
+   const navigate = useNavigate();
+   const handleDonateClick = (e) => {
+    e.preventDefault(); 
+
+    if (!user) {
+        // If user not logged in, navigate to login page
+        alert("You must be logged in to make a donation. Please log in or register if you haven't already.");
+        navigate("/login")
+    } else {
+        // If user is logged in, navigate to the donation page
+        navigate("/donation");
+    }
+};
     return (
         <>
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -28,9 +38,11 @@ function Navigation({ loggedIn, setLoggedIn, setUser, user }) {
                         <li className="nav-item"><a className="nav-link" href="/#services">Services</a></li>
                         <li className="nav-item"><a className="nav-link" href="/#team">Team</a></li>
                         <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
+                        <li className="nav-item"><Link className="nav-link" to="/kits">Kits</Link></li>
+                        <li className="nav-item"><Link className="nav-link" to="#" onClick={handleDonateClick}>Donate</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
                         
-                        <li className="nav-item"><Link className="nav-link" to="/confirmation">Confirmation</Link></li>
+                        
                         
                         {loggedIn ? (
                             <>

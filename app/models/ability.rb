@@ -14,6 +14,8 @@ class Ability
       can [ :update, :destroy ], KitRequest, user_id: user.id # Users can update or destroy their own kit requests
       can :read, Kit
       can :read, KitItem
+      can :create, Donation
+      can :read, Donation, user_id: user.id
 
     end
   end
