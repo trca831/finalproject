@@ -100,20 +100,31 @@ function Donation({user}) {
     return (
         <>
         <section className="page-section" id="register">
+        <h2 className="text-center section-heading text-uppercase text-dark" style={{ fontSize: 32, marginTop: 80 }}>Support Our Mission to Make Classrooms More Inclusive</h2>
+        <h3 class="text-center section-subheading" style={{ fontSize: 20 }}>Your donation helps provide free neurodiversity awareness kits to classrooms across the country.</h3>
+        <div className="container mb-5 text-centered" style={{ width: 1000}}>
+            <p>When you donate to Project Aware, you're helping create inclusive learning environments for students everywhere. Every contribution, big or small, allows us to provide free classroom kits filled with books, lesson plans, and materials that encourage neurodiversity awareness.</p>
+
+            <p>These resources help teachers foster understanding, empathy, and acceptance in their classrooms, ensuring that neurodivergent students feel supported and valued. Your support can make a lasting difference in the lives of both teachers and students.</p>
+
+            <p>Together, we can build a future where every child's unique learning style is celebrated.
+            </p>
+        </div>
           <div className="container mt-5 p-5 rounded bg-light w-75"  style={{
             boxShadow: '25px 25px 55px rgba(0, 0, 0, 0.5)', 
             borderTop: '1.5px solid rgba(255, 255, 255, 0.5)',
             borderLeft: '1.5px solid rgba(255, 255, 255, 0.5)',
             backdropFilter: 'blur(10px) '
             }}>
-        <h2 class="text-center section-heading text-uppercase text-dark">Support Our Cause</h2>
-        <h3 class="text-center section-subheading text-muted">Your donations help us make a difference.</h3>
+
+                <h4 className="text-center section-heading text-uppercase text-dark">Donation Form</h4>
+        
 
         <div className={errorMessages ? "text-center text-danger text-bold mb-3" : "d-none"} id="submitErrorMessage">
               {errorMessages && <p>{errorMessages}</p>}
               </div>
 
-        <form action="YOUR_PAYMENT_PROCESSOR_URL" method="POST" id="registerForm" onSubmit={handleSubmit}>
+        <form action="PAYMENT_PROCESSOR_URL" method="POST" id="registerForm" onSubmit={handleSubmit}>
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" class="form-control shadow" id="name" name="name" value={name} required/>

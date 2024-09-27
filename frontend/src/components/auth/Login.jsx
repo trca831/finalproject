@@ -70,10 +70,10 @@ export default function Login({setLoggedIn}) {
           const errorData = await response.json();
           setLoginMessages(errorData.errors.join(", ") || "Login failed");
         }
-      } catch (error) {
+      } catch (errorData) {
         // Handle other errors
-        setLoginMessages("An error occurred: " + error.message);
-        console.log(error.message)
+        setLoginMessages("An error occurred: " + errorData);
+        console.log(errors)
       }
     };
   

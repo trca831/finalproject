@@ -54,8 +54,19 @@ function Kits({user, setUser}) {
             <div className="text-center">
               <h2 className="section-heading text-uppercase">Available Kits</h2>
               <h3 className="section-subheading text-muted">
-                Browse our collection of curated learning kits.
+              Get the materials you need to promote neurodiversity awareness in your classroom.
               </h3>
+            </div>
+            <div className="container mb-5 text-center" id="services" style={{ width: 750}}>
+              <p>Teachers, we know how important it is to create a classroom that supports all learners. That's why we're offering free neurodiversity awareness kits, filled with resources to help you introduce students to the concepts of neurodivergence in a positive, engaging way.</p>  
+
+              <p>Each kit includes grade-appropriate materials like:</p>
+              <ul style={{textAlign: "center", listStylePosition: "inside", padding: 0, marginBottom: 20}}>
+              <li>Books that feature neurodivergent characters</li>
+              <li>Lesson plans that encourage understanding and empathy</li>
+              <li>Classroom activities to promote inclusion and discussion</li>
+              </ul>
+              <p>Simply select the kit that's right for your grade level, and we'll send it directly to your school. Together, we can help every student feel like they belong.</p>
             </div>
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}

@@ -67,7 +67,7 @@ export default function Logout({ setLoggedIn }) {
 
   return (
     <>    
-    <button className="btn btn-primary ms-3" onClick={handleLogout}>
+    <button className="btn btn-primary" onClick={handleLogout}>
       Logout
     </button>
     </>

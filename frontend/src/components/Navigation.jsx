@@ -22,7 +22,7 @@ function Navigation({ loggedIn, setLoggedIn, setUser, user }) {
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div className="container">
                 {/* <a className="navbar-brand" href="#page-top"><img src="/assets/img/navbar-logo.svg" alt="..." /></a> */}
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="true" aria-label="Toggle navigation">
                     Menu
                     <i className="fas fa-bars ms-1"></i>
                 </button>
@@ -34,7 +34,7 @@ function Navigation({ loggedIn, setLoggedIn, setUser, user }) {
 
                         </>
                         )}
-                        <li className="nav-item"><a className="nav-link ms-5" href="/">Home</a></li>
+                        <li className="nav-item"><a className="nav-link" href="/">Home</a></li>
                         <li className="nav-item"><a className="nav-link" href="/#services">Services</a></li>
                         <li className="nav-item"><a className="nav-link" href="/#team">Team</a></li>
                         <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
