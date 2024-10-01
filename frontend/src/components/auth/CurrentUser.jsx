@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { API_URL2 } from '../../constants';
+import { Link } from 'react-router-dom';
 
 const CurrentUser = ({ setLoggedIn, setUser, user }) => {
     // const [user, setUser] = useState(null);
@@ -7,6 +8,7 @@ const CurrentUser = ({ setLoggedIn, setUser, user }) => {
 
     useEffect(() => {
         const fetchUser = async () => {
+            if(!user) {
             try {
                 const response = await fetch(userUrl, {
                     headers: {
@@ -25,19 +27,20 @@ const CurrentUser = ({ setLoggedIn, setUser, user }) => {
             } catch (error) {
                 console.error("Error fetching current user");
             }
-        };
+        }};
 
         fetchUser();
-    }, [setLoggedIn, setUser, userUrl]);
+    }, [setLoggedIn, user, setUser, userUrl]);
     // Stretch Goal: Add admin dashboard
     if (!user) return null;
 
     return (
-        <div className='m-0 p-0'>
+        <div className='m-0 p-0 d-inline-flex'>
             <p className='text-white bold' style={{ marginRight: 100 }}>
             <em>Welcome, {user.name.split(' ')[0]}!</em>
             </p>
-            {user.role === 'admin' && <Link to="/admin">Admin Dashboard</Link>}
+            {user.role === 'admin' && <Link to="/admin"><i className="fas fa-user-shield"></i>
+                </Link>}
         </div>
     );
 };

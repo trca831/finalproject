@@ -46,7 +46,7 @@ function Navigation({ loggedIn, setLoggedIn, setUser, user }) {
                         
                         {loggedIn ? (
                             <>
-                            <li><Logout setLoggedIn={setLoggedIn} /></li>
+                            <li><Logout setLoggedIn={setLoggedIn} setUser={setUser} /></li>
                             </>
                         ) : (
                             <>                            

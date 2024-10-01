@@ -4,8 +4,7 @@ class Api::V1::DonationsController < ApplicationController
 
   # GET /api/v1/donations
   def index
-    donations = current_user.admin? ? Donation.all : current_user.kit_requests
-    render json: donations, status: :ok
+    render json: @donations, status: :ok
   end
 
   # GET /api/v1/donations/1

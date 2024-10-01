@@ -3,7 +3,7 @@ import { API_URL2 } from "../../constants";
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from "react-router-dom";
 
-export default function Logout({ setLoggedIn }) {
+export default function Logout({ setLoggedIn, setUser }) {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
@@ -16,6 +16,7 @@ export default function Logout({ setLoggedIn }) {
     if (!jwt) {
       alert('You are already logged out or your session has expired.');
       setLoggedIn(false);
+      setUser(null);
       navigate('/login')
       return;
     }
@@ -44,23 +45,25 @@ export default function Logout({ setLoggedIn }) {
       if (response.ok) {
         alert('Logged out successfully.');
         localStorage.removeItem('jwt');
-        setLoggedIn(false); 
+        setLoggedIn(false);
+        setUser(null);
         
         console.log("Logout successful.")
 
       } else {
         const message = response.json();
-        setErrorMessage(message);
+        setErrorMessage(message.error.message);
         console.error(errorMessage);
         alert("Your session has expired, please sign in again.");
         setLoggedIn(false);
+        setUser(null);
         navigate("/login")
 
     }
 
     } catch (error) {
-        console.error("An error occurred:", error);
-        alert(error)
+        console.error("An error occurred:", error.message);
+        alert(error.message)
     }
     
   };

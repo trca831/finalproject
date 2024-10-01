@@ -16,6 +16,7 @@ class Ability
       can :read, KitItem
       can :create, Donation
       can :read, Donation, user_id: user.id
+      can :create, Contact
 
     end
   end

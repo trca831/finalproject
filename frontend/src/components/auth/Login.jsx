@@ -68,12 +68,16 @@ export default function Login({setLoggedIn}) {
         } else {
           // Handle registration error
           const errorData = await response.json();
-          setLoginMessages(errorData.errors.join(", ") || "Login failed");
+          setLoginMessages(errorData.status.message || "Login failed");
+          
+
+      // Access the status and message in the JSON response
+      console.log('Error Code:', errorData.status.code);
+      console.log('Error Message:', errorData.status.message);
         }
-      } catch (errorData) {
+      } catch (error) {
         // Handle other errors
-        setLoginMessages("An error occurred: " + errorData);
-        console.log(errors)
+        console.log("An error occurred:", error)
       }
     };
   

@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   # API routes
   namespace :api do
     namespace :v1 do
+      get "admin_dashboard", to: "admin_dashboard#index"
+      resources :users
       resources :donations
+      resources :contacts
       resources :kit_requests, only: [ :index, :create, :show, :update, :destroy ] do
         collection do
           get "current", to: "kit_requests#current"

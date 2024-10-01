@@ -4,8 +4,7 @@ class Api::V1::KitRequestsController < ApplicationController
 
   # GET /api/v1/kit_requests
   def index
-    kit_requests = current_user.admin? ? KitRequest.all : current_user.kit_requests
-    render json: kit_requests, status: :ok
+    render json: @kit_requests, status: :ok
   end
 
   # POST /api/v1/kit_requests
@@ -36,8 +35,9 @@ class Api::V1::KitRequestsController < ApplicationController
   # DELETE /api/v1/kit_requests/:id
   def destroy
     @kit_request.destroy
-    head :no_content
+    render json: { message: "Kit request successfully deleted." }, status: :no_content
   end
+
 
   private
 
