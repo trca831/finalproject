@@ -10,10 +10,10 @@ const SampleChart = () => {
     const myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
           label: '# of Kit Requests',
-          data: [12, 19, 10, 5, 7, 3],
+          data: [12, 19, 10, 5, 7, 3, 15],
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -43,7 +43,7 @@ const SampleChart = () => {
     });
 
     return () => {
-      myChart.destroy(); // Clean up the chart on component unmount
+      myChart.destroy(); 
     };
   }, []);
 

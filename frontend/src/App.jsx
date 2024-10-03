@@ -15,6 +15,7 @@ import Donation from './components/pages/Donation';
 import RequestSpeaker from './components/pages/RequestSpeaker';
 import { jwtDecode } from 'jwt-decode';
 import AdminDashboard from './components/pages/AdminDashboard';
+import NewForms from './components/NewForms';
 
 
 
@@ -73,6 +74,7 @@ function App() {
             <Route path="/donation" element={<Donation user={user}/>} />
             <Route path="/speaker" element={<RequestSpeaker/>}/>
             <Route path="/admin" element={user && user.role === 'admin' ? <AdminDashboard user={user} /> : <Navigate to="/" />} />
+            <Route path="/add_user" element={<NewForms/>} />
           </Routes>
         </PageWrapper>
       </Router>

@@ -71,31 +71,30 @@ const KitsAndItemsTable = () => {
 
   return (
     <div>
-      <h3>All Kits and Kit Items</h3>
       {kitsData.length > 0 ? (
-        <table className='table-striped table-bordered table-hover'>
+        <table className='table-striped table-info table-bordered table-hover'>
           <thead>
             <tr>
               <th>Kit ID</th>
               <th>Kit Name</th>
-              <th>KitItem ID</th> {/* New column for KitItem ID */}
-              <th>Kit Item Name</th>
+              <th style={{ width: 10}}>KitItem ID</th>
+              <th style={{ width: 440 }}>Kit Item Name</th>
               <th>Kit Item Description</th>
             </tr>
           </thead>
           <tbody>
           {kitsData.map(kit => (
-              <tr key={kit.id}>
+              <tr key={kit.id} style={{ verticalAlign: 'top' }}>
                 <td>{kit.id}</td>
                 <td>{kit.name}</td>
                 <td colSpan={3}>
-                  <table className='table-striped table-bordered'>
+                  <table className='table-striped table-info table-bordered'>
                     <tbody>
                       {kit.items.map(item => (
-                        <tr key={item.id}>
-                          <td>{item.id}</td> {/* KitItem ID */}
-                          <td>{item.name}</td> {/* KitItem Name */}
-                          <td>{item.description}</td> {/* KitItem Description */}
+                        <tr key={item.id} style={{ verticalAlign: 'top' }}>
+                          <td>{item.id}</td>
+                          <td>{item.name}</td> 
+                          <td>{item.description}</td> 
                         </tr>
                       ))}
                     </tbody>

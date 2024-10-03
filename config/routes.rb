@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get "admin_dashboard", to: "admin_dashboard#index"
+      get "kit_items_only", to: "kit_items#index_kit_items_only"
+      post "kit_items_only", to: "kit_items#create_kit_items_only"
       resources :users
       resources :donations
       resources :contacts

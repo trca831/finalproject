@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 
-const DashTable = ({ apiEndpoint, headers }) => {
+const DashTable = ({ apiEndpoint, headers, setShowKitsTable }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,7 +28,8 @@ const DashTable = ({ apiEndpoint, headers }) => {
         setError(err.message); 
         console.error("Error fetching data:", err);
       } finally {
-        setLoading(false); 
+        setLoading(false);
+        setShowKitsTable(false); 
       }
     };
 

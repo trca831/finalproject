@@ -1,7 +1,6 @@
-import React, {useState, useEffect } from "react";
+import React, {useState, useEffect, useRef } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import SampleChart from "../SampleChart";
-// import SampleChartTwo from "../SampleChartTwo";
 import SampleChartThree from "../SampleChartThree";
 import DashCardSet from "../DashCardSet";
 import { API_URL } from "../../constants";
@@ -14,12 +13,15 @@ const AdminDashboard = ({ user }) => {
   
   const userUrl = `${API_URL}/users`
   const kitsUrl = `${API_URL}/kits`
-  const kitItemsUrl = `${API_URL}/kit_items`
+  const kitItemsUrl = `${API_URL}/kit_items_only`
   const donationUrl = `${API_URL}/donations`
   const contactsUrl = `${API_URL}/contacts`
   const kitRequestsUrl = `${API_URL}/kit_requests`
-
   
+  const [showKitsTable, setShowKitsTable] = useState(false);
+  const [cardHeader, setCardHeader] = useState('Data Tables')
+
+    
   const headers = {
     userUrl: [
       { key: 'id', label: 'User Id' },
@@ -80,7 +82,38 @@ const AdminDashboard = ({ user }) => {
   const ContactsTable = () => <DashTable header={headers.contactsUrl} apiEndpoint={contactsUrl}/>
 
 
-  const [selectedEndpoint, setSelectedEndpoint] = useState(userUrl);
+  const [selectedEndpoint, setSelectedEndpoint] = useState('');
+
+  // useEffect to set card header based on active table
+  useEffect(() => {
+    if (showKitsTable) {
+      setCardHeader("Kits With Items Table");
+    } else {
+      switch (selectedEndpoint) {
+        case userUrl:
+          setCardHeader("User Table");
+          break;
+        case kitItemsUrl:
+          setCardHeader("Kit Items Table");
+          break;
+        case kitsUrl:
+          setCardHeader("Kits Table");
+          break;
+        case donationUrl:
+          setCardHeader("Donations Table");
+          break;
+        case kitRequestsUrl:
+          setCardHeader("Kit Requests Table");
+          break;
+        case contactsUrl:
+          setCardHeader("Contacts Table");
+          break;
+        default:
+          setCardHeader("Data Tables");
+      }
+    }
+  }, [showKitsTable, selectedEndpoint]);
+
 
   if (user.role !== "admin") {
     return (
@@ -135,7 +168,7 @@ const AdminDashboard = ({ user }) => {
         tabindex="-1"
         id="offcanvasExample"
         aria-labelledby="offcanvasExampleLabel"
-        style={{ width: 250 }}
+        style={{ width: 300 }}
       >
         <div className="offcanvas-header">
           <h5 className="offcanvas-title mb-3" id="offcanvasExampleLabel">
@@ -156,8 +189,9 @@ const AdminDashboard = ({ user }) => {
         contactsUrl={contactsUrl} 
         kitRequestsUrl={kitRequestsUrl} 
         setSelectedEndpoint={setSelectedEndpoint}
+        setShowKitsTable={setShowKitsTable}
         
-      />
+         />
       </div>
       <main className="mt-3 pt-3" style={{ zIndex: -500 }}>
         <div className="container-fluid">
@@ -165,7 +199,7 @@ const AdminDashboard = ({ user }) => {
             <div className="row">
               <div className="col-md-6 mb-3">
                 <div className="card">
-                  <div className="card-header">Charts</div>
+                  <div className="card-header">Kit Requests (January - July)</div>
                   <div className="card-body">
                     <SampleChart />
                   </div>
@@ -173,7 +207,7 @@ const AdminDashboard = ({ user }) => {
               </div>
               <div className="col-md-6 mb-3">
                 <div className="card">
-                  <div className="card-header">Charts</div>
+                  <div className="card-header">Donations (January - July)</div>
                   <div className="card-body">
                     <SampleChartThree />
                   </div>
@@ -183,21 +217,22 @@ const AdminDashboard = ({ user }) => {
             <div className="row">
               <div className="col-md-12 mb-3">
                 <div className="card">
-                  <div className="card-header">Data Tables</div>
+                  <div className="card-header">{cardHeader}</div>
                   <div className="card-body d-flex justify-content-center">
                     <div id="table" style={{ overflowX: 'auto' }}>
-                    {selectedEndpoint === userUrl && <DashTable headers={headers.userUrl} apiEndpoint={userUrl} />}
-                    {selectedEndpoint === kitsUrl && <DashTable headers={headers.kitsUrl} apiEndpoint={kitsUrl} />}
-                    {selectedEndpoint === kitItemsUrl && <DashTable headers={headers.kitItemsUrl} apiEndpoint={kitItemsUrl} />}
-                    {selectedEndpoint === kitRequestsUrl && <DashTable headers={headers.kitRequestsUrl} apiEndpoint={kitRequestsUrl} />}
-                    {selectedEndpoint === donationUrl && <DashTable headers={headers.donationUrl} apiEndpoint={donationUrl} />}
-                    {selectedEndpoint === contactsUrl && <DashTable headers={headers.contactsUrl} apiEndpoint={contactsUrl} />}
+                    {selectedEndpoint === userUrl && <DashTable headers={headers.userUrl} apiEndpoint={userUrl}  setShowKitsTable={setShowKitsTable}/>}
+                    {selectedEndpoint === kitsUrl && <DashTable headers={headers.kitsUrl} apiEndpoint={kitsUrl} setShowKitsTable={setShowKitsTable}/>}
+                    {selectedEndpoint === kitItemsUrl && <DashTable headers={headers.kitItemsUrl} apiEndpoint={kitItemsUrl} setShowKitsTable={setShowKitsTable} />}
+                    {selectedEndpoint === kitRequestsUrl && <DashTable headers={headers.kitRequestsUrl} apiEndpoint={kitRequestsUrl} setShowKitsTable={setShowKitsTable}/>}
+                    {selectedEndpoint === donationUrl && <DashTable headers={headers.donationUrl} apiEndpoint={donationUrl} setShowKitsTable={setShowKitsTable}/>}
+                    {selectedEndpoint === contactsUrl && <DashTable headers={headers.contactsUrl} apiEndpoint={contactsUrl} setShowKitsTable={setShowKitsTable}/>}
+                    {showKitsTable && <KitsAndItemsTable />}
+                    {selectedEndpoint === "" || showKitsTable && <p>Please select an option from the menu to view data</p>}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <KitsAndItemsTable />
           </div>
       </main>
     </>
