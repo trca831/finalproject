@@ -1,14 +1,12 @@
 import React from 'react';
-import AddNew from './pages/AddNew';
-import NewUser from './NewUser';
+import { Outlet } from 'react-router-dom';
 
 const NewForms = () => {
     return (
-      <div className=''>
-        <AddNew header="Add New User">
-          <NewUser />
-        </AddNew>
-        </div>
+      <div>
+        
+        <Outlet/>
+      </div>
 
     );
 };

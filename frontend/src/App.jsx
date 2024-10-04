@@ -16,6 +16,10 @@ import RequestSpeaker from './components/pages/RequestSpeaker';
 import { jwtDecode } from 'jwt-decode';
 import AdminDashboard from './components/pages/AdminDashboard';
 import NewForms from './components/NewForms';
+import NewKit from './components/NewKit';
+import NewUser from './components/NewUser';
+import AddNew from './components/pages/AddNew';
+import NewKitItem from './components/NewKitItem';
 
 
 
@@ -74,7 +78,11 @@ function App() {
             <Route path="/donation" element={<Donation user={user}/>} />
             <Route path="/speaker" element={<RequestSpeaker/>}/>
             <Route path="/admin" element={user && user.role === 'admin' ? <AdminDashboard user={user} /> : <Navigate to="/" />} />
-            <Route path="/add_user" element={<NewForms/>} />
+            <Route path="/new_forms" element={<NewForms/>} >
+              <Route path="add_user" element={<AddNew header="Add New User"><NewUser /></AddNew>} />
+              <Route path="add_kit" element={<AddNew header="Add New Kit"><NewKit /></AddNew>} />
+              <Route path="add_kit_item" element={<AddNew header="Add New Kit Item"><NewKitItem /></AddNew>} />
+            </Route>
           </Routes>
         </PageWrapper>
       </Router>
