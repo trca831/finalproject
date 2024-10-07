@@ -12,6 +12,11 @@ function Kits({user, setUser}) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+
     async function loadKits() {
       try {
         const response = await fetch(kitsUrl);
@@ -48,6 +53,7 @@ function Kits({user, setUser}) {
 
   return (
     <>
+    <div className="black-strip"></div>
       <div>
         <section className="page-section bg-light" id="portfolio">
           <div className="container">

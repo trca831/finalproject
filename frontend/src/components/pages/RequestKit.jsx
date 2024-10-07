@@ -24,6 +24,10 @@ function RequestKit({ user }) {
     const requestKitUrl = `${API_URL}/kit_requests`
     const jwt = localStorage.getItem('jwt');
     const navigate = useNavigate();
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
     
 
     const handleSubmit = async (e) => {
@@ -92,6 +96,7 @@ function RequestKit({ user }) {
 
     return(
         <>
+        <div className="black-strip"></div>
         <div>
         <section className="page-section" id="register">
         <div className="container mt-3">

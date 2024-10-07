@@ -6,6 +6,11 @@ class Ability
 
     if user.role == "admin"
       can :manage, :all # Admins can manage everything
+      can :manage, User
+      can :update, User
+      can :destroy, User
+      can :manage, KitItem
+      can :create, KitItem
     else
       # Allow users to update their own profile
       can :update, User, id: user.id

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get "admin_dashboard", to: "admin_dashboard#index"
       get "kit_items_only", to: "kit_items#index_kit_items_only"
       post "kit_items_only", to: "kit_items#create_kit_items_only"
+      patch "kit_items_only/:id", to: "kit_items#update_kit_items_only"
       resources :users
       resources :donations
       resources :contacts
@@ -24,7 +25,11 @@ Rails.application.routes.draw do
         end
       end
       resources :kits do
-        resources :kit_items, only: [ :index, :show ]
+        resources :kit_items do
+          member do
+            post "add_to_kit", to: "kit_items#add_to_kit"
+          end
+        end
       end
     end
   end

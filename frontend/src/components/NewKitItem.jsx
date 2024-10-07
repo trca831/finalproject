@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../constants';
 
 const NewKitItem = () => {
-  const [ItemData, setItemData] = useState('');
+  
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
+  const [image, setImage] = useState(null);
  
   const [messages, setMessages] = useState('');
   const navigate = useNavigate();
@@ -16,22 +17,26 @@ const NewKitItem = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
        
-      const updatedKitData = {
-          kit_item: {
-            name,
-          description,
-          }
-      };
+    const formData = new FormData(); 
+
+    // Append the kit item data to the formData
+    formData.append('kit_item[name]', name);
+    formData.append('kit_item[description]', description);
     
+
+    // Append the image file to the formData if there is one
+    if (image) {
+      formData.append('kit_item[image]', image);
+    }
       try {
-        // Send POST request to registration endpoint
+        
         const response = await fetch(kitItemUrl, {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${jwt}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(updatedKitData),
+          body: formData,
         });
     
         if (response.ok) {
@@ -42,6 +47,7 @@ const NewKitItem = () => {
           // Clear input fields
           setName("");
           setDescription("");
+          setImage(null);
               
           navigate("/admin");
         } else {
@@ -76,6 +82,15 @@ const NewKitItem = () => {
           className="form-control" 
           value={description} 
           onChange={(e) => setDescription( e.target.value )} 
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Image</label>
+        <input 
+          type="file" 
+          className="form-control" 
+          value={image} 
+          onChange={(e) => setImage( e.target.value )} 
         />
       </div>
       

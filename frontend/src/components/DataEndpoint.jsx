@@ -66,7 +66,7 @@ const DataEndpoint = ({ userUrl, kitsUrl, kitItemsUrl,  donationUrl, contactsUrl
                 </Link>
               </li>
               <li className="mb-2">
-                <Link to="/add-kit-with-items" className="nav-link px-5">
+                <Link to="/new_forms/add_item_to_kit" className="nav-link px-5">
                     <span className="me-2"><i class="fa-solid fa-box-open"></i></span>
                     <span>Add Item to Kit</span>
                 </Link>

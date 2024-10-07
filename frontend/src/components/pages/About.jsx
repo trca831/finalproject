@@ -1,9 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 
 function About() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+
   return (
+    
     <div>
+        <div className='black-strip'></div>
         <section className="page-section" id="about">
             <div className="container">
                 <div className="text-center">

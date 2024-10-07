@@ -12,6 +12,10 @@ function Contact({ user }) {
     const contactUrl = `${API_URL}/contacts`
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+
+    useEffect(() => {
         if (user) {
             setName(user.name);
             setEmail(user.email);

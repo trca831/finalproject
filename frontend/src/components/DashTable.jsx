@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 
-const DashTable = ({ apiEndpoint, headers, setShowKitsTable }) => {
+const DashTable = ({ apiEndpoint, headers, setShowKitsTable, handleShow }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -55,14 +55,25 @@ const DashTable = ({ apiEndpoint, headers, setShowKitsTable }) => {
               {headers.map(header => (
                 <th key={header.key} className='px-3 py-3'>{header.label}</th>
               ))}
+              <th>Action</th>
             </tr>
+            
           </thead>
           <tbody>
             {data.map(item => (
               <tr key={item.id} style={{ verticalAlign: 'top' }}>
                 {headers.map(header => (
                   <td key={header.key} className='px-3 py-3'>{item[header.key]}</td>
+                  
                 ))}
+                <td>
+              <button 
+                className="btn btn-info mt-3" 
+                onClick={() => handleShow(item)}
+              >
+                Edit
+              </button>
+            </td>
               </tr>
             ))}
           </tbody>

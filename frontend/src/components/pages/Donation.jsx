@@ -16,6 +16,11 @@ function Donation({user}) {
     const jwt = localStorage.getItem('jwt');
 
     useEffect(() => {
+        // Scroll to the top of the page
+        window.scrollTo(0, 0);
+      }, []);
+
+    useEffect(() => {
         if (user) {
             setName(user.name);
             setEmail(user.email);
@@ -99,6 +104,7 @@ function Donation({user}) {
     }    
     return (
         <>
+        <div className="black-strip"></div>
         <section className="page-section" id="register">
         <h2 className="text-center section-heading text-uppercase text-dark" style={{ fontSize: 32, marginTop: 80 }}>Support Our Mission to Make Classrooms More Inclusive</h2>
         <h3 class="text-center section-subheading" style={{ fontSize: 20 }}>Your donation helps provide free neurodiversity awareness kits to classrooms across the country.</h3>

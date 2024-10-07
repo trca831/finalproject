@@ -5,6 +5,11 @@ import { API_URL } from "../../constants";
 
 function Confirmation({user}) {
     const current_user = user?.name || "Guest";
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+
     return (
         <>
         <section id="confirmation" >
