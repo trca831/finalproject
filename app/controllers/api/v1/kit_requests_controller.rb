@@ -1,5 +1,4 @@
 class Api::V1::KitRequestsController < ApplicationController
-  before_action :authenticate_user!
   load_and_authorize_resource
 
   # GET /api/v1/kit_requests

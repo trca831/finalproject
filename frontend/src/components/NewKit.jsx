@@ -11,6 +11,12 @@ const NewKit = () => {
   const [messages, setMessages] = useState('');
   const navigate = useNavigate();
   const kitUrl = `${API_URL}/kits`
+  const jwt = localStorage.getItem('jwt')
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +39,7 @@ const NewKit = () => {
         const response = await fetch(kitUrl, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Authorization": `Bearer ${jwt}`,
           },
           body: formData,
         });
@@ -47,7 +53,7 @@ const NewKit = () => {
           setName("");
           setDescription("");
           setGradeLevel("");
-          setImage(null);
+          setImage('');
               
           navigate("/admin");
         } else {
@@ -93,7 +99,7 @@ const NewKit = () => {
           className="form-control" 
           value={grade_level} 
           onChange={(e) => setGradeLevel( e.target.value )}
-          placeholder='YYYY-YYYY'
+          placeholder='PK-2, 3-5, 6-8, 9-12'
           required
         />
       </div>
@@ -101,11 +107,8 @@ const NewKit = () => {
         <label className="form-label">Image</label>
         <input 
           type="file" 
-          className="form-control" 
-          value={image} 
-          onChange={(e) => setImage( e.target.value )}
-          
-
+          className="form-control"
+          onChange={handleImageChange}
         />
       </div>
       

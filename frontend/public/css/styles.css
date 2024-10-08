@@ -3505,6 +3505,33 @@ textarea.form-control-lg {
   --bs-dropdown-header-color: #adb5bd;
 }
 
+.dropdown-container {
+  position: relative;
+  width: 100%;
+}
+
+.dropdown-container select {
+  width: 100%;
+  padding-right: 2.5rem; 
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 15px; 
+}
+
+.dropdown-container::after {
+  content: '▼'; 
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #333;
+}
+
+
+
+
 .btn-group,
 .btn-group-vertical {
   position: relative;

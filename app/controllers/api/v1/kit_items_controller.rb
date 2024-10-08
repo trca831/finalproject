@@ -9,6 +9,7 @@ class Api::V1::KitItemsController < ApplicationController
 
   # POST /api/v1/kit_items_only
   def create_kit_items_only
+    puts "Recieved params: #{params.inspect}"
     kit_item = KitItem.new(kit_item_params)
 
     if kit_item.save
@@ -36,8 +37,11 @@ class Api::V1::KitItemsController < ApplicationController
   def update_kit_items_only
     kit_item = KitItem.find(params[:id]) # Find the kit item by ID
 
-    if kit_item.update(kit_item_params) # Update with strong parameters
-      render json: { message: "Kit item updated successfully", kit_item: kit_item }, status: :ok
+    if kit_item.update(kit_item_params)
+      image_url = kit_item.image.attached? ? url_for(kit_item.image) : nil
+      puts "Image attached: #{kit_item.image.attached?}"
+      render json: { message: "Kit item updated successfully",
+      kit_item: kit_item.as_json.merge(image_url: url_for(kit_item.image)) }, status: :ok
     else
       render json: { errors: kit_item.errors.full_messages }, status: :unprocessable_entity
     end

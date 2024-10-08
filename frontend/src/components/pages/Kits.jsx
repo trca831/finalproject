@@ -98,7 +98,8 @@ function Kits({user, setUser}) {
                           <img
                             className="portfolio-img img-fluid"
                             src={kit.image_url}
-                            alt="..."
+                            alt="Book covers"
+                            style={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'}}
                           />
                         </a>
                         <div className="portfolio-caption">

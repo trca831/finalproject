@@ -34,7 +34,6 @@ const NewKitItem = () => {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${jwt}`,
-            "Content-Type": "application/json",
           },
           body: formData,
         });
@@ -85,14 +84,14 @@ const NewKitItem = () => {
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">Image</label>
-        <input 
-          type="file" 
-          className="form-control" 
-          value={image} 
-          onChange={(e) => setImage( e.target.value )} 
-        />
+      <label className="form-label">Image</label>
+      <input 
+        type="file" 
+        className="form-control" 
+        onChange={(e) => setImage(e.target.files[0])} 
+      />
       </div>
+
       
       
       <button type="submit" className="btn btn-primary me-5">Add Kit Item</button>

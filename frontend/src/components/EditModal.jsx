@@ -69,13 +69,20 @@ const EditModal = ({ record, show, handleClose, handleDelete, recordType }) => {
     }
     
     // Add the image if selected
-    if (selectedImage) {
-        updatedFormData.append(`${recordType}[image]`, selectedImage);
-        console.log("image appended")
-    }
+if (selectedImage) {
+  if (recordType === 'kit') {
+    updatedFormData.append('kit[image]', selectedImage);
+    console.log('kit image appended');
+  } else if (recordType === 'kitItem') {
+    updatedFormData.append('kit_item[image]', selectedImage);
+    console.log('kit_item image appended');
+  }
+}
+
     
     const apiEndpoint = `${API_URL}/${api}/${formData.id}`;
     console.log(apiEndpoint);
+    console.log(updatedFormData);
     // Call the reusable function
     const result = await handleApiUpdate(apiEndpoint, updatedFormData);
     
@@ -98,7 +105,7 @@ const EditModal = ({ record, show, handleClose, handleDelete, recordType }) => {
   
       if (response.ok) {
         const data = await response.json(); 
-        console.log('Update successful:', data);
+        console.log("Update successful:", data);
         return { success: true, data };
       } else {
         console.error('Error updating the record');
@@ -143,7 +150,7 @@ const EditModal = ({ record, show, handleClose, handleDelete, recordType }) => {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>{`Edit ${recordType}`}</Modal.Title>
+        <Modal.Title>{`Edit ${recordType.charAt(0).toUpperCase() + recordType.slice(1)}`}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form>

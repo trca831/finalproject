@@ -1,14 +1,15 @@
 class Api::V1::DonationsController < ApplicationController
-  before_action :authenticate_user!
   load_and_authorize_resource
 
   # GET /api/v1/donations
   def index
+    @donations = Donation.active
     render json: @donations, status: :ok
   end
 
   # GET /api/v1/donations/1
   def show
+    @donation = Donation.active.find(params[:id])
     render json: @donation
   end
 
@@ -47,6 +48,15 @@ class Api::V1::DonationsController < ApplicationController
       render json: @donation, status: :ok
     else
       render json: { error: @donation.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    donation = Donation.find(params[:id])
+    if donation.update(canceled: true)
+      render json: { message: "Donation successfully canceled" }, status: :ok
+    else
+      render json: { errors: donation.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

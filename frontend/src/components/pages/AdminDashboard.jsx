@@ -6,7 +6,6 @@ import DashCardSet from "../DashCardSet";
 import { API_URL } from "../../constants";
 import DataEndpoint from "../DataEndpoint";
 import DashTable from "../DashTable";
-import KitsAndItemsTable from "../KitsandItemsTable";
 import EditModal from "../EditModal";
 
 const AdminDashboard = ({ user }) => {
@@ -16,12 +15,12 @@ const AdminDashboard = ({ user }) => {
   const donationUrl = `${API_URL}/donations`;
   const contactsUrl = `${API_URL}/contacts`;
   const kitRequestsUrl = `${API_URL}/kit_requests`;
-
-  const [showKitsTable, setShowKitsTable] = useState(false);
   const [cardHeader, setCardHeader] = useState("Data Tables");
   const [record, setRecord] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [recordType, setRecordType] = useState("");
+  const jwt = localStorage.getItem('jwt');
+  const [messages, setMessages] = useState('')
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -85,13 +84,56 @@ const AdminDashboard = ({ user }) => {
     setRecordType("");
   };
 
-  const handleUpdate = async (id, updatedData) => {
-    // Your update logic goes here based on recordType
-  };
 
   const handleDelete = async (id) => {
-    // Your delete logic goes here based on recordType
+    let url = '';
+    switch (recordType) {
+      case 'user':
+        url = `${API_URL}/users/${id}`;
+        break;
+      case 'kitItem':
+        url = `${API_URL}/kit_items_only/${id}`;
+        break;
+      case 'kit':
+        url = `${API_URL}/kits/${id}`;
+        break;
+      case 'donation':
+        url = `${API_URL}/donations/${id}`;
+        break;
+      case 'kitRequest':
+        url = `${API_URL}/kit_requests/${id}`;
+        break;
+      case 'contact':
+        url = `${API_URL}/contacts/${id}`;
+        break;
+      default:
+        console.log("Unknown record type");
+        return;
+    }
+  
+    try {
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${jwt}`,
+        },
+      });
+  
+      if (response.ok) {
+        console.log(`${recordType} with ID ${id} deleted successfully.`);
+        setMessages(`${recordType.charAt(0).toUpperCase() + recordType.slice(1)} deleted successfully.`);
+        setShowModal(false);
+        // Refresh data or update state as necessary
+      } else {
+        console.log(`Failed to delete ${recordType} with ID ${id}: ${response.statusText}`);
+        setMessages(`Failed to delete ${recordType}.`);
+      }
+    } catch (error) {
+      console.error(`Error deleting ${recordType} with ID ${id}:`, error);
+      setMessages(`An error occurred: ${error.message}`);
+    }
   };
+  
 
   const UserTable = () => (
     <DashTable
@@ -138,35 +180,31 @@ const AdminDashboard = ({ user }) => {
 
   const [selectedEndpoint, setSelectedEndpoint] = useState("");
 
-  // useEffect to set card header based on active table
   useEffect(() => {
-    if (showKitsTable) {
-      setCardHeader("Kits With Items Table");
-    } else {
-      switch (selectedEndpoint) {
-        case userUrl:
-          setCardHeader("User Table");
-          break;
-        case kitItemsUrl:
-          setCardHeader("Kit Items Table");
-          break;
-        case kitsUrl:
-          setCardHeader("Kits Table");
-          break;
-        case donationUrl:
-          setCardHeader("Donations Table");
-          break;
-        case kitRequestsUrl:
-          setCardHeader("Kit Requests Table");
-          break;
-        case contactsUrl:
-          setCardHeader("Contacts Table");
-          break;
-        default:
-          setCardHeader("Data Tables");
-      }
+    switch (selectedEndpoint) {
+      case userUrl:
+        setCardHeader("User Table");
+        break;
+      case kitItemsUrl:
+        setCardHeader("Kit Items Table");
+        break;
+      case kitsUrl:
+        setCardHeader("Kits Table");
+        break;
+      case donationUrl:
+        setCardHeader("Donations Table");
+        break;
+      case kitRequestsUrl:
+        setCardHeader("Kit Requests Table");
+        break;
+      case contactsUrl:
+        setCardHeader("Contacts Table");
+        break;
+      default:
+        setCardHeader("Data Tables");
     }
-  }, [showKitsTable, selectedEndpoint]);
+  }, [selectedEndpoint]);
+  
 
   if (user.role !== "admin") {
     return (
@@ -177,7 +215,6 @@ const AdminDashboard = ({ user }) => {
       </section>
     );
   }
-  console.log("showKitsTable:", showKitsTable);
   console.log("selectedEndpoint:", selectedEndpoint);
 
   return (
@@ -190,20 +227,11 @@ const AdminDashboard = ({ user }) => {
           className="d-inline-flex w-100 justify-content-between p-0 ms-4 me-4"
           style={{ marginTop: 80 }}
         >
+          
           <a className="navbar-brand text-uppercase text-white">
-            Admin Dashboard
+          <i class="bi bi-graph-up text-white me-3"></i> Admin Dashboard
           </a>
-          <form className="form-inline d-inline-flex w-50">
-            <input
-              className="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-primary my-2 my-sm-0" type="submit">
-              <i className="fas fa-search"></i>
-            </button>
-          </form>
+          
         </div>
       </nav>
 
@@ -220,7 +248,7 @@ const AdminDashboard = ({ user }) => {
 
       <div
         className="offcanvas offcanvas-start bg-dark text-white"
-        tabindex="-1"
+        tabIndex="-1"
         id="offcanvasExample"
         aria-labelledby="offcanvasExampleLabel"
         style={{ width: 300 }}
@@ -244,7 +272,6 @@ const AdminDashboard = ({ user }) => {
           contactsUrl={contactsUrl}
           kitRequestsUrl={kitRequestsUrl}
           setSelectedEndpoint={setSelectedEndpoint}
-          setShowKitsTable={setShowKitsTable}
         />
       </div>
       <main className="mt-3 pt-3" style={{ zIndex: -500 }}>
@@ -280,7 +307,6 @@ const AdminDashboard = ({ user }) => {
                           <DashTable
                             headers={headers.userUrl}
                             apiEndpoint={userUrl}
-                            setShowKitsTable={setShowKitsTable}
                             handleShow={(item) => handleShow(item, "user")}
                           />
                         )}
@@ -288,7 +314,6 @@ const AdminDashboard = ({ user }) => {
                           <DashTable
                             headers={headers.kitsUrl}
                             apiEndpoint={kitsUrl}
-                            setShowKitsTable={setShowKitsTable}
                             handleShow={(item) => handleShow(item, "kit")}
                           />
                         )}
@@ -296,7 +321,6 @@ const AdminDashboard = ({ user }) => {
                           <DashTable
                             headers={headers.kitItemsUrl}
                             apiEndpoint={kitItemsUrl}
-                            setShowKitsTable={setShowKitsTable}
                             handleShow={(item) => handleShow(item, "kitItem")}
                           />
                         )}
@@ -304,7 +328,6 @@ const AdminDashboard = ({ user }) => {
                           <DashTable
                             headers={headers.kitRequestsUrl}
                             apiEndpoint={kitRequestsUrl}
-                            setShowKitsTable={setShowKitsTable}
                             handleShow={(item) =>
                               handleShow(item, "kitRequest")
                             }
@@ -314,7 +337,6 @@ const AdminDashboard = ({ user }) => {
                           <DashTable
                             headers={headers.donationUrl}
                             apiEndpoint={donationUrl}
-                            setShowKitsTable={setShowKitsTable}
                             handleShow={(item) => handleShow(item, "donation")}
                           />
                         )}
@@ -322,22 +344,19 @@ const AdminDashboard = ({ user }) => {
                           <DashTable
                             headers={headers.contactsUrl}
                             apiEndpoint={contactsUrl}
-                            setShowKitsTable={setShowKitsTable}
                             handleShow={(item) => handleShow(item, "contact")}
                           />
                         )}
                       </>
                     )}
 
-                    {showKitsTable ? (
-                      <KitsAndItemsTable />
-                    ) : (
+                    {
                       selectedEndpoint === "" && (
                         <p>
                           Please select an option from the menu to view data
                         </p>
                       )
-                    )}
+                    }
                     
 
                   </div>
@@ -352,7 +371,6 @@ const AdminDashboard = ({ user }) => {
               record={record}
               show={showModal}
               handleClose={handleClose}
-              handleUpdate={handleUpdate}
               handleDelete={handleDelete}
               recordType={recordType}
             />

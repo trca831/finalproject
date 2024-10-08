@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   ROLES = %w[admin user].freeze
   has_many :kit_requests
-  has_many :donations
+  has_many :donations, -> { where(canceled: false) }
   has_many :contacts
 
   before_create :set_default_role

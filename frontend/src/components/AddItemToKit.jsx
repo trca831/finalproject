@@ -1,114 +1,95 @@
-import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { API_URL } from '../constants';
 
+import React, { useState, useEffect } from 'react';
+
 const AddItemToKit = () => {
+  const [kitItems, setKitItems] = useState([]);
+  const [kits, setKits] = useState([]);
+  const [selectedKitItem, setSelectedKitItem] = useState('');
+  const [selectedKit, setSelectedKit] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [kit_id, setKitId] = useState('');
   const [image, setImage] = useState(null);
   const [messages, setMessages] = useState('');
+  const jwt = localStorage.getItem('jwt')
   const navigate = useNavigate();
-  const kitItemsUrl = `${API_URL}/kit_items_only`;
-  const jwt = localStorage.getItem('jwt');
+
+  useEffect(() => {
+    fetch(`${API_URL}/kit_items_only`)
+      .then(response => response.json())
+      .then(data => setKitItems(data));
+    fetch(`${API_URL}/kits`)
+      .then(response => response.json())
+      .then(data => setKits(data));
+  }, []);
+
+  const handleKitItemChange = (e) => {
+    const kitItemId = e.target.value;
+    const kitItem = kitItems.find(item => item.id === parseInt(kitItemId));
+    setSelectedKitItem(kitItemId);
+    setName(kitItem.name);
+    setDescription(kitItem.description);
+
+  };
+
+  const handleKitChange = (e) => {
+    setSelectedKit(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append('kit_item[name]', name);
-    formData.append('kit_item[description]', description);
-
-    if (image) {
-      formData.append('kit_item[image]', image);
-    }
-
+  
     try {
-      const response = await fetch(kitItemsUrl, {
+      const response = await fetch(`${API_URL}/kits/${selectedKit}/kit_items/${selectedKitItem}/add_to_kit`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${jwt}`
+          'Authorization': `Bearer ${jwt}`,
         },
-        body: formData,
       });
-
+  
       if (response.ok) {
-        const kitItem = await response.json();
-
-        await fetch(`${API_URL}/kits/${kit_id}/kit_items/${kitItem.id}/add_to_kit`, {
-          method: 'POST',
-        });
-
-        console.log('New Kit Item added successfully!');
-        alert('New Kit Item added successfully!');
-
-        setName('');
-        setDescription('');
-        setKitId('');
-        setImage(null);
-        
+        console.log("Kit item successfully added to kit!");
+        setMessages('Kit item successfully added to kit!');
         navigate('/admin');
       } else {
-        const errorData = await response.json();
-        setMessages(
-          errorData.status.errors.join(', ') || 'Kit Item creation failed'
-        );
+        console.log("Adding to kit failed:", response.statusText);
+        setMessages('Adding to kit failed.');
       }
     } catch (error) {
-      setMessages('An error occurred: ' + error.message);
-      console.log(error.message);
+      console.error("Error:", error);
+      setMessages("An error occurred: " + error.message);
     }
   };
-
-  const handleKitIdChange = (e) => {
-    setKitId(e.target.value);
-  };
-
+  
   return (
     <form onSubmit={handleSubmit}>
-      <div className="mb-3">
-        <label className="form-label">Name</label>
-        <input 
-          type="text" 
-          className="form-control" 
-          value={name} 
-          onChange={(e) => setName(e.target.value)} 
-        />
+      <div className="mb-3 dropdown-container">
+        <label className="form-label">Kit Item</label>
+        <select className="form-control" value={selectedKitItem} onChange={handleKitItemChange}>
+          <option value="" disabled>Select a kit item to add</option>
+          {kitItems.map(kitItem => (
+            <option key={kitItem.id} value={kitItem.id}>
+              {kitItem.name}
+            </option>
+          ))}
+        </select>
       </div>
-      <div className="mb-3">
-        <label className="form-label">Description</label>
-        <input 
-          type="text" 
-          className="form-control" 
-          value={description} 
-          onChange={(e) => setDescription(e.target.value)} 
-        />
+      <div className="mb-3 dropdown-container">
+        <label className="form-label">Kit</label>
+        <select className="form-control" value={selectedKit} onChange={handleKitChange}>
+          <option value="" disabled>Select a kit</option>
+          {kits.map(kit => (
+            <option key={kit.id} value={kit.id}>
+              {kit.name}
+            </option>
+          ))}
+        </select>
       </div>
-      <div className="mb-3">
-        <label className="form-label">Kit Id</label>
-        <input 
-          type="text" 
-          className="form-control" 
-          value={kit_id} 
-          onChange={handleKitIdChange} 
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">Image</label>
-        <input 
-          type="file" 
-          className="form-control" 
-          onChange={(e) => setImage(e.target.files[0])} 
-        />
-      </div>
-      
       <button type="submit" className="btn btn-primary me-5">Add Kit Item</button>
-      <button className="btn btn-danger">
-        <Link to="/admin" style={{ textDecoration: 'none' }}>Cancel</Link>
-      </button>
+      <button type="button" className='btn btn-danger'><Link to="/admin" style={{ textDecoration: "none" }}>Cancel</Link></button>
       <div>{messages}</div>
     </form>
-  );
-};
-
+);
+}
 export default AddItemToKit;
