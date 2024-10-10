@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :kit do
-    name { "Discovery Kit" }
+    sequence(:name) { |n| "Discovery Kit #{n}" } # Ensure unique names
     description { "Everything you need." }
     grade_level { "PK-2" }
   end

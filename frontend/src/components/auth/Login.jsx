@@ -75,9 +75,10 @@ export default function Login({setLoggedIn}) {
       console.log('Error Code:', errorData.status.code);
       console.log('Error Message:', errorData.status.message);
         }
-      } catch (error) {
+     } catch (error) {
         // Handle other errors
         console.log("An error occurred:", error)
+        setLoginMessages(error)
       }
     };
   
