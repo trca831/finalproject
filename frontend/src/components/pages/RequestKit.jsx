@@ -83,7 +83,7 @@ function RequestKit({ user }) {
         // Handle request error
         const errorData = await response.json();
         const errorMessages = errorData.errors.map(error => {
-          return error.replace("School year ", ""); // Remove the attribute name if desired
+          return error.replace("School year ", ""); 
       });
         setRequestMessages(errorMessages.join(", ") || "Request failed");
       }
@@ -99,9 +99,14 @@ function RequestKit({ user }) {
         <div className="black-strip"></div>
         <div>
         <section className="page-section" id="register">
-        <div className="container mt-3">
+        <div className="container mt-5 p-5 rounded bg-light w-50"  style={{
+            boxShadow: '25px 25px 55px rgba(0, 0, 0, 0.5)', 
+            borderTop: '1.5px solid rgba(255, 255, 255, 0.5)',
+            borderLeft: '1.5px solid rgba(255, 255, 255, 0.5)',
+            backdropFilter: 'blur(10px) '
+            }}>
           <div className="text-center mb-5">
-            <h2 className="section-heading text-uppercase text-dark">Request A Kit</h2>
+          <h4 className="text-center section-heading text-uppercase text-dark">Request A Kit</h4>
           </div>
 
           <div className={requestMessages ? "text-center text-dark text-bold mb-3" : "d-none"} id="submitErrorMessage">
@@ -115,7 +120,7 @@ function RequestKit({ user }) {
         
             
           >
-            <div className="container w-50 text-dark">
+            <div className="container text-dark">
             <div className="mb-5">
               <div>
                 <div className="form-group">
@@ -248,7 +253,6 @@ function RequestKit({ user }) {
               >
                 Submit
               </button>
-              <Link to="/request_confirmation"><p>Confirmation fix</p></Link>
             </div>
             
           </form>

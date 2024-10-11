@@ -12,6 +12,7 @@ class Ability
       can :manage, KitItem
       can :create, KitItem
       can :manage, KitRequest
+      can :manage, Donation
     else
       # Allow users to update their own profile
       can :update, User, id: user.id
@@ -22,6 +23,7 @@ class Ability
       can :read, KitItem
       can :create, Donation
       can :read, Donation, user_id: user.id
+      cannot :update, Donation
       can :create, Contact
 
     end

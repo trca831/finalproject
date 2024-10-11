@@ -52,7 +52,7 @@ RSpec.describe "Contacts", type: :request do
     context "when user role is admin" do
       it "allows contact record to be updated" do
         sign_in admin_user
-        patch api_v1_contacts_path(contact), params: { contact: { message: "I have a new phone number." } }, headers: { 'Authorization': "Bearer #{@auth_token}" }
+        patch api_v1_contact_path(contact), params: { contact: { message: "I have a new phone number." } }, headers: { 'Authorization': "Bearer #{@auth_token}" }
         expect(response).to have_http_status(:ok)
         expect(contact.reload.message).to eq("I have a new phone number.")
       end
@@ -60,9 +60,28 @@ RSpec.describe "Contacts", type: :request do
     context "when user role is not admin" do
       it "does not allow contact to be updated" do
         sign_in regular_user
-        patch api_v1_contacts_path(contact), params: { contact: { message: "I have a new phone number." } }, headers: { 'Authorization': "Bearer #{@auth_token}" }
-        expect(response).to have_http_status(:unauthorized)
+        patch api_v1_contact_path(contact), params: { contact: { message: "I have a new phone number." } }, headers: { 'Authorization': "Bearer #{@auth_token}" }
+        expect(response).to have_http_status(:forbidden)
         expect(contact.reload.message).to_not eq("I have a new phone number.")
+      end
+    end
+  end
+
+  describe "DELETE /destroy" do
+    context "when user is an admin" do
+      it "deletes the kit request" do
+        sign_in admin_user
+        delete api_v1_contact_path(contact), headers: { 'Authorization': "Bearer #{@auth_token}" }
+        expect(response).to have_http_status(:ok)
+        expect { contact.reload }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+
+    context "when user is not an admin" do
+      it "denies access" do
+        sign_in regular_user
+        delete api_v1_contact_path(contact), headers: { 'Authorization': "Bearer #{@auth_token}" }
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end

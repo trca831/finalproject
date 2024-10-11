@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { API_URL2, API_URL } from '../constants';
+import { useNavigate } from 'react-router-dom';
 
 const EditModal = ({ record, show, handleClose, handleDelete, recordType }) => {
   const [formData, setFormData] = useState({});
   const [selectedImage, setSelectedImage] = useState(null);
   const jwt = localStorage.getItem('jwt');
+  const navigate = useNavigate();
+  
 
   // Set initial form data when the modal opens
   useEffect(() => {
@@ -116,10 +119,11 @@ if (selectedImage) {
       return { success: false };
     }
   };
-
+  // Stretch Goal: Extend the functionality of the password reset
   const handlePasswordReset = async () => {
+    
     try {
-      const response = await fetch(`${API_URL2}/users/password`, {
+      const response = await fetch(`${API_URL2}/password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -130,6 +134,7 @@ if (selectedImage) {
   
       if (response.ok) {
         alert('Password reset email sent successfully.');
+        navigate("/admin");
       } else {
         alert('Error sending password reset email.');
       }
