@@ -29,37 +29,67 @@ import AddItemToKit from './components/AddItemToKit';
 function App() {
   const [loggedIn, setLoggedIn] = useState();
   const [user, setUser] = useState(null);
+  const [tokenExpiration, setTokenExpiration] = useState(null);
+
     
   useEffect(() => {
     const token = localStorage.getItem('jwt');
+
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        const now = Date.now() / 1000;
-        
+        const now = Date.now() / 1000; // Current time in seconds
+
         if (decoded.exp > now) {
-          setLoggedIn(true); //Token is not expired
-          if (decoded.user) {
-            setUser(decoded.user); // Set user if present
-            console.log(decoded.user)
+          setLoggedIn(true); // Token is valid
+          setUser(decoded.user ? decoded.user : null); // Set user data
+
+          // Calculate remaining time until token expiration
+          const timeUntilExpiration = (decoded.exp - now) * 1000;
+
+          // Notify 5 minutes before expiration
+          if (timeUntilExpiration < 300000) {
+            alert("Your session is about to expire. Please save your work.");
+          }
+
+          // Set token expiration time in state
+          setTokenExpiration(timeUntilExpiration);
+
         } else {
-            setUser(null); // User data is not in the token
-        }
-        } else {
-          setLoggedIn(false); // Token is expired
+          // Token is expired, clear it
+          console.log("Token has expired, clearing JWT.");
+          localStorage.removeItem('jwt');
+          setLoggedIn(false);
           setUser(null);
+          alert("Your session has expired. Please log in again.");
         }
       } catch (error) {
         console.error('Token decoding failed:', error);
+        localStorage.removeItem('jwt');
         setLoggedIn(false);
         setUser(null);
-
       }
     } else {
+      // No token, set to logged out state
       setLoggedIn(false);
       setUser(null);
     }
   }, []);
+
+  // Logs out the user when the token expires
+  useEffect(() => {
+    if (tokenExpiration) {
+      const timer = setTimeout(() => {
+        console.log("Token has expired, logging out.");
+        localStorage.removeItem('jwt');
+        setLoggedIn(false);
+        setUser(null);
+        alert("Your session has expired. Please log in again.");
+      }, tokenExpiration); 
+
+      return () => clearTimeout(timer); 
+    }
+  }, [tokenExpiration]);
 
   return (
     <>    

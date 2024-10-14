@@ -67,10 +67,10 @@ const DashTable = ({ apiEndpoint, headers, handleShow }) => {
                 ))}
                 <td>
               <button 
-                className="btn btn-dark mt-3 ms-1" 
+                className="btn btn-outline mt-3 ms-1" 
                 onClick={() => handleShow(item)}
               >
-                <i className="fas fa-eye"></i>
+                <i className="fa-regular fa-eye"></i>
 
               </button>
             </td>
