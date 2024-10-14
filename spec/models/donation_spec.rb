@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Donation, type: :model do
-  let(:user) { create(:user) }
-  let (:donation) { create(:donation, user: user) }
+  let(:regular_user) { create(:user, :regular_user) }
+  let (:donation) { create(:donation, user: regular_user) }
 
 
   it "is valid with valid attributes" do
@@ -10,17 +10,17 @@ RSpec.describe Donation, type: :model do
   end
 
   it "is not valid without an amount" do
-    donation = build(:donation, user: user, amount: nil)
+    donation = build(:donation, amount: nil)
     expect(donation).to_not be_valid
   end
 
   it "is not valid without a payment_status" do
-    donation = build(:donation, user: user, payment_status: nil)
+    donation = build(:donation, payment_status: nil)
     expect(donation).to_not be_valid
   end
 
   it "is not valid without a valid amount" do
-    donation = build(:donation, user: user, amount: 0)
+    donation = build(:donation, amount: 0)
     expect(donation).to_not be_valid
   end
 
