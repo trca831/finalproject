@@ -5,6 +5,8 @@ Inclusive Education Support App
 Overview
 This app provides teachers with resources to support social-emotional learning for all students. It offers free kits containing books with neurodivergent characters, tailored lesson plans by grade levels, and options for scheduling speakers and making donations to support the mission of inclusive education.
 
+![](https://github.com/mhope21/ProjectAware.gif)
+
 Features
 Resource Kits: Sign up to receive free kits with books and lesson plans.
 
