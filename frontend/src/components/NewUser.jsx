@@ -39,7 +39,7 @@ const NewUser = () => {
         if (response.ok) {
           
           console.log("New User added successfully!");
-          setRegistrationMessages("New User added successfully!");
+          alert("New User added successfully!");
     
           // Clear input fields
           setEmail("");

@@ -91,6 +91,7 @@ if (selectedImage) {
     
     if (result.success) {
         console.log(`${recordType} updated successfully!`);
+        alert(`${recordType} updated successfully!`);
         handleClose(); // Close the modal after success
     }
     };
