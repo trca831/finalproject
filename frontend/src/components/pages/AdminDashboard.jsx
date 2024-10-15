@@ -121,7 +121,7 @@ const AdminDashboard = ({ user }) => {
   
       if (response.ok) {
         console.log(`${recordType} with ID ${id} deleted successfully.`);
-        setMessages(`${recordType.charAt(0).toUpperCase() + recordType.slice(1)} deleted successfully.`);
+        alert(`${recordType.charAt(0).toUpperCase() + recordType.slice(1)} deleted successfully.`);
         setShowModal(false);
         // Refresh data or update state as necessary
       } else {

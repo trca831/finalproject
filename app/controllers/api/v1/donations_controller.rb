@@ -16,7 +16,7 @@ class Api::V1::DonationsController < ApplicationController
   # POST /api/v1/donations
   def create
     payment_token = params[:donation][:payment_token][0]
-    @donation = Donation.new(donation_params)
+    @donation = Donation.new(donation_params.merge(canceled: false))
     @donation.user = @current_user
 
     # Process the payment
@@ -63,6 +63,6 @@ class Api::V1::DonationsController < ApplicationController
   private
 
   def donation_params
-    params.require(:donation).permit(:amount, :payment_status, :save_payment_info, :payment_token)
+    params.require(:donation).permit(:user_id, :amount, :payment_status, :save_payment_info, :payment_token)
   end
 end

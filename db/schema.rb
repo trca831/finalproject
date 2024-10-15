@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_07_175600) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_15_141616) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -58,7 +58,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_07_175600) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "payment_token"
-    t.boolean "canceled"
+    t.boolean "canceled", default: false
+    t.string "stripe_checkout_session_id"
+    t.string "stripe_payment_intent_id"
     t.index ["user_id"], name: "index_donations_on_user_id"
   end
 
