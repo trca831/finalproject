@@ -95,6 +95,7 @@ function RequestKit({ user }) {
   };
 
     return(
+      // Displays form for requesting a kit
         <>
         <div className="black-strip"></div>
         <div>

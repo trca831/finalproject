@@ -8,6 +8,7 @@ export default function Logout({ setLoggedIn, setUser }) {
   const navigate = useNavigate();
 
   // Stretch Goal: Alert user to token expiration and allow auto re-login
+  // Handles log out, fetches api with token and logs out of account. If there is no token, it redirects to login page. It also checks for token expiration.
   const handleLogout = async () => {
     const logoutUrl = `${API_URL2}/logout`
     const jwt = localStorage.getItem('jwt');

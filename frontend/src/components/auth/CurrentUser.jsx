@@ -3,9 +3,9 @@ import { API_URL2 } from '../../constants';
 import { Link } from 'react-router-dom';
 
 const CurrentUser = ({ setLoggedIn, setUser, user }) => {
-    // const [user, setUser] = useState(null);
+    
     const userUrl = `${API_URL2}/current_user`
-
+    // Fetches the current user whenever someone logs in
     useEffect(() => {
         const fetchUser = async () => {
             if(!user) {
@@ -35,6 +35,7 @@ const CurrentUser = ({ setLoggedIn, setUser, user }) => {
     if (!user) return null;
 
     return (
+        // Displays a welcome message and if admin, a link to access admin dashboard.
         <div className='m-0 p-0 d-inline-flex'>
             <p className='text-white bold' style={{ marginRight: 100 }}>
             <em>Welcome, {user.name.split(' ')[0]}!</em>

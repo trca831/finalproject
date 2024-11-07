@@ -21,7 +21,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
+// Example chart for admin dashboard
 const SampleChartThree = () => {
   const data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],

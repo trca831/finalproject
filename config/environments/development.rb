@@ -37,7 +37,7 @@ Rails.application.configure do
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
   config.action_mailer.perform_caching = false
-
+  # I set up an email for the project, needed for sending password reset email?
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_options = { from: "projectawarend@gmail.com" }

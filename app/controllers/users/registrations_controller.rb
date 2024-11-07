@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  # Method that allows the Rails API to create session? I am not sure how it works, but it makes Devise work properly with Rails API only.
   include RackSessionFix
 
   before_action :configure_sign_up_params, only:  [ :create ]

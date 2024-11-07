@@ -14,7 +14,7 @@ export default function Registration() {
   const [userData, setUserData] = useState({});
 
   const registrationUrl = `${API_URL2}/signup`;
-
+  // Handles initial signup, sets default role as user since only admin can assign a user as admin. Uses a POST action to sign up new user.
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Form submitted");
@@ -65,6 +65,7 @@ export default function Registration() {
   };
 
   return (
+    // Displays form for registration
     <div>
       <section className="page-section" id="register">
       <div className="container mt-5 p-5 rounded bg-light w-50"  style={{

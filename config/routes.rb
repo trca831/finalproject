@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   # API routes
   namespace :api do
     namespace :v1 do
+      # Special routes for the dashboard cards and editing only kit items
       get "admin_dashboard", to: "admin_dashboard#index"
       get "kit_items_only", to: "kit_items#index_kit_items_only"
       post "kit_items_only", to: "kit_items#create_kit_items_only"
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
       resources :kits do
         resources :kit_items do
           member do
+            # Special route for adding item to kit
             post "add_to_kit", to: "kit_items#add_to_kit"
           end
         end

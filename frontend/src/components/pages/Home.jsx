@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 function Home() {
 
   return (
+    // Displays home page
     <>
         <Header/>
         <section className="page-section" id="services">

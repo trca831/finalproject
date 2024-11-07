@@ -8,6 +8,7 @@ import CurrentUser from "./CurrentUser";
 
 
 export default function Login({setLoggedIn}) {
+    // Handles login, setting the data for the user
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     
@@ -83,6 +84,7 @@ export default function Login({setLoggedIn}) {
     };
   
     return (
+      // Displays registration form
       <div>
         <section className="page-section" id="register">
           <div className="container mt-5 p-5 rounded bg-light w-50"  style={{

@@ -1,4 +1,5 @@
 class KitSerializer < ActiveModel::Serializer
+  # Defines how to display the kit model
   attributes :id, :name, :description, :grade_level, :image_url
 
   has_many :kit_items

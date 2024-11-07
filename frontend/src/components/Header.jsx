@@ -1,6 +1,6 @@
 import React from 'react'
 
-
+// Header component for displaying header on page
 function Header() {
   return (
     <>

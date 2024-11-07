@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// Passed in the various api endpoints for the tables
 const DataEndpoint = ({ userUrl, kitsUrl, kitItemsUrl,  donationUrl, contactsUrl, kitRequestsUrl, setSelectedEndpoint }) => {  
 
   
   return (
+    // Displays the menu links for each table, sets the api endpoint based on menu selection
     <>
     <div className="offcanvas-body p-0">
           <nav className="navbar-dark">

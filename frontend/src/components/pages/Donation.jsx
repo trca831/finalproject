@@ -19,7 +19,7 @@ function Donation({user}) {
         // Scroll to the top of the page
         window.scrollTo(0, 0);
       }, []);
-
+      // Sets name and email to user name and email if user signed in
     useEffect(() => {
         if (user) {
             setName(user.name);
@@ -27,7 +27,7 @@ function Donation({user}) {
         }
     }, [user]);
 
-    
+    // For amount buttons
     const handleAmountClick = (value) => {
         setAmount(value);
     };
@@ -103,6 +103,7 @@ function Donation({user}) {
         
     }    
     return (
+        // Displays donation form
         <>
         <div className="black-strip"></div>
         <section className="page-section" id="register">

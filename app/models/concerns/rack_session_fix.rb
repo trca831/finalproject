@@ -1,4 +1,5 @@
 module RackSessionFix
+  # Allows Devise to work properly with an API only application?
   extend ActiveSupport::Concern
   class FakeRackSession < Hash
     def enabled?

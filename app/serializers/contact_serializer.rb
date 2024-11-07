@@ -1,5 +1,5 @@
 class ContactSerializer < ActiveModel::Serializer
-  # include JSONAPI::Serializer
+  # Defines how to display the contact model
   attributes :id, :name, :email, :phone, :message, :user_id
 
   def user_id

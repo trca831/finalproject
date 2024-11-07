@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Reusable component for dashboard cards
 const DashboardCard = ({ title, value, color }) => {
   return (
     <div className={`card text-white bg-${color} h-100`}>

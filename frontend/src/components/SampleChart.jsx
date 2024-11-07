@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
-
+// Example chart for admin dashboard
 const SampleChart = () => {
   useEffect(() => {
     const ctx = document.getElementById('myChart').getContext('2d');

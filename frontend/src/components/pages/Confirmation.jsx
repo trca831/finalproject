@@ -4,6 +4,7 @@ import { API_URL } from "../../constants";
 
 
 function Confirmation({user}) {
+    // Displays confirmation for kit request success
     const current_user = user?.name || "Guest";
 
     useEffect(() => {

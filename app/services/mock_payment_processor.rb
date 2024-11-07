@@ -1,3 +1,4 @@
+# Until I get Stripe functional, this module handles the simulation of payment processing.
 class MockPaymentProcessor
   def self.process(amount, credit_card_info, save_payment_info)
     if amount > 0

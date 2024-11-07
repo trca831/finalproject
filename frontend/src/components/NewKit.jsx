@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../constants';
 
+// Component for creating a new kit
 const NewKit = () => {
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
@@ -13,6 +14,7 @@ const NewKit = () => {
   const kitUrl = `${API_URL}/kits`
   const jwt = localStorage.getItem('jwt')
 
+  // Handles adding an image to the kit
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
   };
@@ -35,7 +37,7 @@ const NewKit = () => {
     }
     
       try {
-        
+        // Fetch kits and add new kit to backend
         const response = await fetch(kitUrl, {
           method: "POST",
           headers: {
@@ -54,7 +56,7 @@ const NewKit = () => {
           setDescription("");
           setGradeLevel("");
           setImage('');
-              
+          // Redirect to admin page
           navigate("/admin");
         } else {
           
@@ -71,6 +73,7 @@ const NewKit = () => {
     };
 
   return (
+    // Display form for creating new kit
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
         <label className="form-label">Name</label>

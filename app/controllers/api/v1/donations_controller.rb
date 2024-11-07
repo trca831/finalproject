@@ -51,6 +51,7 @@ class Api::V1::DonationsController < ApplicationController
     end
   end
 
+  # DELETE api/v1/donations/1
   def destroy
     donation = Donation.find(params[:id])
     if donation.update(canceled: true)
