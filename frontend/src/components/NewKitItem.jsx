@@ -64,6 +64,7 @@ const NewKitItem = () => {
     };
 
   return (
+    // Displays form for creating a new Kit Item and attached image
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
         <label className="form-label">Name</label>

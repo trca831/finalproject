@@ -15,6 +15,7 @@ const AddItemToKit = () => {
   const jwt = localStorage.getItem('jwt')
   const navigate = useNavigate();
 
+  // Fetches kit items and kits from the backend
   useEffect(() => {
     fetch(`${API_URL}/kit_items_only`)
       .then(response => response.json())
@@ -24,6 +25,7 @@ const AddItemToKit = () => {
       .then(data => setKits(data));
   }, []);
 
+  // Finds desired kit item and sets variable
   const handleKitItemChange = (e) => {
     const kitItemId = e.target.value;
     const kitItem = kitItems.find(item => item.id === parseInt(kitItemId));
@@ -33,13 +35,14 @@ const AddItemToKit = () => {
 
   };
 
+  // Sets desired kit
   const handleKitChange = (e) => {
     setSelectedKit(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+    // Adds selected kit item to selected kit
     try {
       const response = await fetch(`${API_URL}/kits/${selectedKit}/kit_items/${selectedKitItem}/add_to_kit`, {
         method: 'POST',
@@ -63,6 +66,7 @@ const AddItemToKit = () => {
   };
   
   return (
+    // Displays form to select kit item and kit from drop down
     <form onSubmit={handleSubmit}>
       <div className="mb-3 dropdown-container">
         <label className="form-label">Kit Item</label>

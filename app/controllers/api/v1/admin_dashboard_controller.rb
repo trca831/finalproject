@@ -1,4 +1,6 @@
 class Api::V1::AdminDashboardController < ApplicationController
+  # Method for show the information in the dashboard cards: user count, kit request count, and the total amount of donations.
+
   # GET /api/v1/admin_dashboard
   def index
     users_count = User.count

@@ -16,6 +16,7 @@ function Contact({ user }) {
       }, []);
 
     useEffect(() => {
+        // If the user is signed in, user name and email are auto populated in the form
         if (user) {
             setName(user.name);
             setEmail(user.email);
@@ -23,15 +24,16 @@ function Contact({ user }) {
     }, [user]);
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent the default form submission behavior
+        e.preventDefault();
     
-        // Basic validation (optional)
+        // Basic validation that all fields are populated
         if (!name || !email || !message) {
             setErrorMessages("All fields are required.");
             return;
         }
     
         try {
+            // Sends data entered on form to the backend
             const response = await fetch(contactUrl, {
                 method: "POST",
                 headers: {
@@ -44,7 +46,7 @@ function Contact({ user }) {
                 const errorData = await response.json();
                 setErrorMessages(errorData.errors.join(", "));
             } else {
-                // Handle success, e.g., clear the form
+                // Handle success, clear the form
                 console.log(response.json)
                 setName("");
                 setEmail("");
@@ -59,6 +61,7 @@ function Contact({ user }) {
     };
 
   return (
+    // Displays contact form
     <div>
         <section className="page-section" id="contact">
             <div className="container">

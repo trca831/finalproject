@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 
-
+// Possible new feature: Ability to schedule a speaker to come to a user's school
 function RequestSpeaker() {
 
     useEffect(() => {

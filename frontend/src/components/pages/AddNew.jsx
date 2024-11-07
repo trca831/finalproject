@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 
 const AddNew = ({ header, children }) => {
+  // Helps page to load to top of screen
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
+    // Dynamic form for adding a new user, kit, kit_item
     <div>
         <section className="page-section" id="register">
         <div className="container d-flex justify-content-center mt-3" >

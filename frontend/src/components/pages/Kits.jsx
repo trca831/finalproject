@@ -16,7 +16,7 @@ function Kits({user, setUser}) {
   }, []);
 
   useEffect(() => {
-
+    // Loads kits from the backend with associated images
     async function loadKits() {
       try {
         const response = await fetch(kitsUrl);
@@ -45,13 +45,14 @@ function Kits({user, setUser}) {
   
       navigate('/login');
     } else {
-      // If the user exists, navigate to the RequestKit page and pass kitId as state
+      // If the user exists, navigate to the RequestKit page and pass kitId as state to ensure they request the correct kit selection
       navigate('/kit_requests', { state: { kitId } });
     }
   };
   
 
   return (
+    // Displays kit page
     <>
     <div className="black-strip"></div>
       <div>

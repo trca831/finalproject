@@ -34,7 +34,7 @@ const EditModal = ({ record, show, handleClose, handleDelete, recordType }) => {
     
     const updatedFormData = new FormData();
     let api;
-   
+   // Record type determines which data to display in the edit modal and api determines which api endpoint to send the data to 
     if (recordType === 'kit') {
         updatedFormData.append('kit[name]', formData.name);
         updatedFormData.append('kit[description]', formData.description);
@@ -43,8 +43,7 @@ const EditModal = ({ record, show, handleClose, handleDelete, recordType }) => {
     } else if (recordType === 'kitItem') {
         updatedFormData.append('kit_item[name]', formData.name);
         updatedFormData.append('kit_item[description]', formData.description); 
-        api = "kit_items_only";
-        console.log("Kit item triggered")       
+        api = "kit_items_only";      
     } else if (recordType === 'kitRequest') {
         updatedFormData.append('kit_request[phone]', formData.phone);
         updatedFormData.append('kit_request[school_year]', formData.school_year);
@@ -121,6 +120,7 @@ if (selectedImage) {
     }
   };
   // Stretch Goal: Extend the functionality of the password reset
+  // When admin is editing user, admin can send a password reset email, button on user edit modal
   const handlePasswordReset = async () => {
     
     try {
@@ -146,7 +146,7 @@ if (selectedImage) {
   };
   
   
-      
+      // For delete button on Modal, allows a particular record to be deleted or canceled if donation
 
   const onDelete = () => {
     handleDelete(record.id); // Pass the record ID to the delete handler
@@ -154,6 +154,7 @@ if (selectedImage) {
   };
 
   return (
+    // Displays appropriate modal for selected record type
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>{`Edit ${recordType.charAt(0).toUpperCase() + recordType.slice(1)}`}</Modal.Title>

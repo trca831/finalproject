@@ -3,7 +3,7 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title } from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title);
-
+// Example chart for admin dashboard
 const SampleChartTwo = () => {
   const data = {
     labels: ['January', 'February', 'March', 'April', 'May'],

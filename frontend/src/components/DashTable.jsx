@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-
+// Passed in api endpoint, headers for tables, and the event handler for showing the Edit Modal from Admin Dashboard component
 const DashTable = ({ apiEndpoint, headers, handleShow }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Use the passed in api endpoint to fetch the appropriate data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -46,6 +47,7 @@ const DashTable = ({ apiEndpoint, headers, handleShow }) => {
   }
 
   return (
+    // Show the correct table for the chosen data and handle if the edit button is clicked by showing the correct modal
     <div >
       {data.length > 0 ? (
         <table className='table-striped table-info table-bordered table-hover table-responsive'>

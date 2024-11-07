@@ -1,6 +1,7 @@
 import React from "react"
 
 function Footer() {
+    // Footer component for displaying footer at the bottom of the page
     return (
         <>
         <footer className="footer py-4">

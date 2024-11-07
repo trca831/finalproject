@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import CurrentUser from "./auth/CurrentUser";
 import Logout from "./auth/Logout";
 
+// Passed in logged in and user state
 function Navigation({ loggedIn, setLoggedIn, setUser, user }) {
    const navigate = useNavigate();
    const handleDonateClick = (e) => {
     e.preventDefault(); 
 
+    // Checks if the user is logged in to prevent or allow navigation to the donation page
     if (!user) {
         // If user not logged in, navigate to login page
         alert("You must be logged in to make a donation. Please log in or register if you haven't already.");
@@ -18,10 +20,10 @@ function Navigation({ loggedIn, setLoggedIn, setUser, user }) {
     }
 };
     return (
+        // Displays navbar, checks if user logged in to display welcome message and logout button or login link
         <>
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div className="container">
-                {/* <a className="navbar-brand" href="#page-top"><img src="/assets/img/navbar-logo.svg" alt="..." /></a> */}
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="true" aria-label="Toggle navigation">
                     Menu
                     <i className="fas fa-bars ms-1"></i>

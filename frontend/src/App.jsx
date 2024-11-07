@@ -31,7 +31,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [tokenExpiration, setTokenExpiration] = useState(null);
 
-    
+    // Method handles login state and token, checking for existence or expiration
   useEffect(() => {
     const token = localStorage.getItem('jwt');
 
@@ -92,6 +92,7 @@ function App() {
   }, [tokenExpiration]);
 
   return (
+    // Sets routes for app navigation and passes props to the necessary components
     <>    
     <div className="App">
       <Router>

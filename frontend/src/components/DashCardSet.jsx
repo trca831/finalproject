@@ -9,6 +9,7 @@ const DashCardSet = () => {
   const dashUrl = `${API_URL}/admin_dashboard`
 
   useEffect(() => {
+    // Fetches data for the dashboard cards
     const fetchDashboardData = async () => {
       try {
         const response = await fetch(dashUrl,  {
@@ -35,6 +36,7 @@ const DashCardSet = () => {
   }, []);
 
   return (
+    // Displays data using the dashboard card component
     <div className="row h-100">
       <div className="col-md-4 mb-3">
         <DashboardCard title="Total # of Registered Users" value={userCount} color="success" />

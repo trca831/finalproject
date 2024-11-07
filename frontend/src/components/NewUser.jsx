@@ -64,6 +64,7 @@ const NewUser = () => {
   
 
   return (
+    // Displays form for creating a new user, admin can set role as user or admin
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
         <label className="form-label">Name</label>
@@ -92,6 +93,7 @@ const NewUser = () => {
           onChange={(e) => setPassword(e.target.value)} 
         />
       </div>
+      {/* It might make sense to add a radio button here for choosing the appropriate role? */}
       <div className="mb-3">
         <label className="form-label">Role</label>
         <input 

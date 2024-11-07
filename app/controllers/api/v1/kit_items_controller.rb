@@ -1,5 +1,4 @@
 class Api::V1::KitItemsController < ApplicationController
-  # load_and_authorize_resource
 
   # GET /api/v1/kit_items_only
   def index_kit_items_only
@@ -19,19 +18,20 @@ class Api::V1::KitItemsController < ApplicationController
     end
   end
 
+  # Method to add new kit item to kit, finds the kit by id and item by id then adds item to kit
   def add_to_kit
     puts "Kit ID: #{params[:kit_id]}"
     puts "KitItem ID: #{params[:id]}"
     kit = Kit.find(params[:kit_id])
     kit_item = KitItem.find(params[:id])
-    
+
     if kit.kit_items << kit_item
-      render json: { message: 'Kit item successfully added to kit' }, status: :ok
+      render json: { message: "Kit item successfully added to kit" }, status: :ok
     else
       render json: { errors: kit.errors.full_messages }, status: :unprocessable_entity
     end
   end
-  
+
 
   # PATCH /api/v1/kit_items_only/:id
   def update_kit_items_only

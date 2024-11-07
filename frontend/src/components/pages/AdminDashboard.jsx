@@ -9,6 +9,7 @@ import DashTable from "../DashTable";
 import EditModal from "../EditModal";
 
 const AdminDashboard = ({ user }) => {
+  // Necessary api endpoints
   const userUrl = `${API_URL}/users`;
   const kitsUrl = `${API_URL}/kits`;
   const kitItemsUrl = `${API_URL}/kit_items_only`;
@@ -25,7 +26,7 @@ const AdminDashboard = ({ user }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  // Sets the headers for the tables based on the endpoint
   const headers = {
     userUrl: [
       { key: "id", label: "User Id" },
@@ -71,20 +72,20 @@ const AdminDashboard = ({ user }) => {
       { key: "user_id", label: "User Id (if available)" },
     ],
   };
-
+  // Sets what is displayed in the modal by item and type
   const handleShow = (item, type) => {
     setRecord(item);
     setRecordType(type); // Set the type of record being edited
     setShowModal(true);
   };
-
+  // Close the modal and resets item and type
   const handleClose = () => {
     setShowModal(false);
     setRecord(null);
     setRecordType("");
   };
 
-
+  // When using the delete action in modal the url is defined by the record type and id so that the appropriate record is deleted.
   const handleDelete = async (id) => {
     let url = '';
     switch (recordType) {
@@ -134,7 +135,7 @@ const AdminDashboard = ({ user }) => {
     }
   };
   
-
+  // Displays the appropriate tables based on the api endpoint, and gives access to correct modal if show action is used.
   const UserTable = () => (
     <DashTable
       headers={headers.userUrl}
@@ -179,7 +180,7 @@ const AdminDashboard = ({ user }) => {
   );
 
   const [selectedEndpoint, setSelectedEndpoint] = useState("");
-
+  // This sets the appropriate api endpoint for getting data from backend for the tables
   useEffect(() => {
     switch (selectedEndpoint) {
       case userUrl:
@@ -218,6 +219,7 @@ const AdminDashboard = ({ user }) => {
   console.log("selectedEndpoint:", selectedEndpoint);
 
   return (
+    // Displays cards, graph data, and Data tables
     <>
       <nav
         className="navbar justify-content-between mt-0"

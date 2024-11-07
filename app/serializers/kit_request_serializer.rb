@@ -1,5 +1,5 @@
 class KitRequestSerializer < ActiveModel::Serializer
-  # include JSONAPI::Serializer
+  # Defines how to display the KitRequest model
   attributes :id, :request_name, :request_email, :requested_kit, :kit_id, :user_id, :school_name, :school_address, :school_year, :comments, :phone, :created_at
 
   def request_name

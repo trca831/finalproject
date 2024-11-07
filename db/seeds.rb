@@ -7,7 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-
+# Initial seeding of my database
 require 'faker'
 
 # Clear tables
@@ -286,7 +286,7 @@ classroom_book.image.attach(
 )
 
 
-# Now associate KitItems with Kits
+# Now associating KitItems with Kits
 discovery_kit.kit_items << henry_book << charlie_book << benji_book << no_words_book << wiggles_book << classroom_book << neurotribes_book
 empowerment_kit.kit_items << boy_bat_book << temple_book << see_me_book << vivy_book << someday_book << not_if_book << spark_book << classroom_book << neurotribes_book
 perspectives_kit.kit_items << goldfish_boy_book << sevens_book << frankie_book << earth_blue_book << same_book << awesome_guide_book << mockingbird_book << classroom_book << neurotribes_book

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+// Method to allow the #(services and team) locations on the home page to come up even when clicked from another page
 const ScrollToHash = () => {
 
     const { hash } = useLocation();

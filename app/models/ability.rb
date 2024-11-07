@@ -1,4 +1,5 @@
 class Ability
+  # Defines the abilities that users have
   include CanCan::Ability
 
   def initialize(user)

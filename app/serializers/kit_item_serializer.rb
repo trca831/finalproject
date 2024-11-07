@@ -1,4 +1,5 @@
 class KitItemSerializer < ActiveModel::Serializer
+  # Defines how to display the KitItem model
   attributes :id, :name, :description, :image_url
 
   # Include image URL from ActiveStorage
