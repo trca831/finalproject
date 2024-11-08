@@ -86,28 +86,30 @@ This app provides teachers with resources to support social-emotional learning f
 
 ## Features
 
-Resource Kits: Sign up to receive free kits with books and lesson plans.
+-Resource Kits: Sign up to receive free kits with books and lesson plans.
 
-Speaker Requests: Request speakers to educate and advocate for neurodivergent individuals.
+-Speaker Requests: Request speakers to educate and advocate for neurodivergent individuals.
 
-Donations: In app forms for donations, with no storage of financial data for better security.
+-Donations: In app forms for donations, with no storage of financial data for better security.
 
-User Roles: Role-based access control for administrators and regular users.
+-User Roles: Role-based access control for administrators and regular users.
 
-File Management: Active Storage for handling image uploads.
+-File Management: Active Storage for handling image uploads.
 
-Technologies
-Backend: Rails API with SQLite3 database.
+## Technologies
+-Backend: Rails API with SQLite3 database.
 
-Frontend: React, styled using Bootstrap.
+-Frontend: React, styled using Bootstrap.
 
-Authentication: Devise and Devise-JWT for secure token-based authentication.
+-Authentication: Devise and Devise-JWT for secure token-based authentication.
 
-Authorization: Cancancan for managing user permissions.
+-Authorization: Cancancan for managing user permissions.
 
-File Uploads: Active Storage for managing file attachments.
+-File Uploads: Active Storage for managing file attachments.
 
-CORS: Rack CORS for secure frontend-backend communication.
+-CORS: Rack CORS for secure frontend-backend communication.
+
+## Entity-Relationship Diagram
 
 ```mermaid
 
@@ -226,22 +228,22 @@ erDiagram
 
 
 ## Future Stretch Goals
-Fully integrate Stripe for donations.
+-Fully integrate Stripe for donations.
 
-Visualize data from tables using charts.
+-Visualize data from tables using charts.
 
-Incorporate a 3rd party API for school information.
+-Incorporate a 3rd party API for school information.
 
-Improve data integrity by refining table columns.
+-Improve data integrity by refining table columns.
 
-Complete scheduling speaker events.
+-Complete scheduling speaker events.
 
-Add a forum for teacher communication.
+-Add a forum for teacher communication.
 
-Provide online content for teachers.
+-Provide online content for teachers.
 
 
-Contributing
+## Contributing
 Feel free to submit issues or pull requests. We welcome contributions to improve the app and support inclusive education!
 
 Created by Marcia Hope
