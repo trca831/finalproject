@@ -2,13 +2,90 @@
 Inclusive Education Support App
 
 
-Overview
+## Overview
 This app provides teachers with resources to support social-emotional learning for all students. It offers free kits containing books with neurodivergent characters, tailored lesson plans by grade levels, and options for scheduling speakers and making donations to support the mission of inclusive education.
 
 ![Project Aware](https://raw.githubusercontent.com/mhope21/finalproject/main/frontend/public/ProjectAware.gif)
 
+## Local Development
 
-Features
+1. Fork and clone the repository.
+
+    In the terminal on your computer, navigate to the directory where you want to store the project and run `git clone` followed by the url copied from the GitHub `<> Code` button
+
+     ```sh
+     git clone <URL>
+     ```
+
+2. Navigate to the project directory and open in VSCode
+
+    ```sh
+    cd finalproject
+    code .
+    ```
+
+3. Open a [split terminal](https://code.visualstudio.com/docs/terminal/basics#_groups-split-panes) in VSCode. Right-click on each of the terminal names in the right-hand menu and select `Rename`. **Give them the following names:**
+
+   - `rails server`
+   - `frontend`
+
+4. Leave `rails server` terminal in the root of the project (`/finalproject`)
+5. In `frontend`, navigate to the `frontend` directory:
+
+   ```sh
+   cd frontend
+   ```
+
+6. Install dependencies
+
+    - In `rails server`:
+
+       ```sh
+       bundle install
+       ```
+
+    - In `frontend`:
+
+       ```sh
+       npm install
+       ```
+
+7. In the project files, delete the `config/credentials.yml.enc` file. Then, in the `rails server` terminal, run the following:
+
+    ```sh
+    EDITOR="code --wait" bin/rails credentials:edit
+    ```
+
+   This will open a file in VSCode. Close this file without changes. This will re-create the credential files for your local environment.
+
+   You should see both the `credentials.yml.enc` and `master.key` files in the `config` folder.
+
+8. In `rails server`, create and seed the database:
+
+    ```sh
+    rails db:prepare
+    ```
+
+9. Start `rails server`
+
+   ```sh
+   rails s
+   ```
+
+    > The backend server runs on `localhost:3000`
+
+10. Start `frontend`
+
+    ```sh
+    npm run dev
+    ```
+
+    > The frontend server runs on `localhost:5173`
+
+11. Open `http://localhost:5173/` and get coding!
+
+## Features
+
 Resource Kits: Sign up to receive free kits with books and lesson plans.
 
 Speaker Requests: Request speakers to educate and advocate for neurodivergent individuals.
@@ -148,7 +225,7 @@ erDiagram
 
 
 
-Future Stretch Goals
+## Future Stretch Goals
 Fully integrate Stripe for donations.
 
 Visualize data from tables using charts.
@@ -162,6 +239,7 @@ Complete scheduling speaker events.
 Add a forum for teacher communication.
 
 Provide online content for teachers.
+
 
 Contributing
 Feel free to submit issues or pull requests. We welcome contributions to improve the app and support inclusive education!
