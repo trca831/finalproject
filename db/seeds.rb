@@ -295,6 +295,6 @@ impact_kit.kit_items << curious_dog_book << rosie_book << different_book << clas
 # Seeding KitRequests
 
 KitRequest.create([
-  { grade_level: 'PK-2', school_year: '2024-2025', kit: discovery_kit },
-  { grade_level: '3-5', school_year: '2024-2025', kit: empowerment_kit }
+  { school_year: '2024-2025', kit: discovery_kit },
+  { school_year: '2024-2025', kit: empowerment_kit }
 ])
