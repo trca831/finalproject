@@ -7,10 +7,10 @@ RSpec.describe User, type: :model do
     expect(regular_user).to be_valid
   end
 
-  it "is not valid without a name" do
-    regular_user.name = nil
-    expect(regular_user).to_not be_valid
-  end
+  # it "is not valid without a name" do
+  #   regular_user.name = nil
+  #   expect(regular_user).to_not be_valid
+  # end
 
   it "is not valid without a valid role" do
     regular_user.role = "Not valid"

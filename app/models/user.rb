@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   before_create :set_default_role
 
-  validates :name, presence: true
+  # validates :name, presence: true
   validates :role, inclusion: { in: ROLES }
 
   def set_default_role
